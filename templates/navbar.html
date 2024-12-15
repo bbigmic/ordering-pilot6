@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+</head>
+
+<body>   
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container d-flex align-items-center justify-content-between">
+            <!-- Logo i Toggler Button -->
+
+                <a href="/" class="logo d-flex align-items-center">
+                    <img src="/static/images/PAPU_logo.png" alt="PAPU KITCHEN">
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+
+            <!-- Zawartość nawigacji -->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav w-100 mb-2">
+                    <li class="nav-item">
+                        <a href="/o-nas" class="nav-link">O nas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/wydarzenia" class="nav-link">Wydarzenia</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/imprezy-okolicznosciowe" class="nav-link">Imprezy okolicznościowe</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/catering" class="nav-link">Cartering</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/godziny-otwarcia" class="nav-link">Godziny otwarcia</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/praca" class="nav-link">Praca</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/kontakt" class="nav-link">Kontakt</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav w-100 flex-wrap">
+                    <li class="nav-item">
+                        <a href="/kategoria/sniadania" class="nav-link category-link">Śniadania</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/kategoria/bowle" class="nav-link category-link">Bowle</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/kategoria/salatki" class="nav-link category-link">Sałatki</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/kategoria/dania-gorace" class="nav-link category-link">Dania gorące</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/kategoria/zupy-desery-przystawki" class="nav-link category-link">Zupy / Desery / Przystawki</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/kategoria/napoje" class="nav-link category-link">Napoje</a>
+                    </li>
+<!--                     <li class="nav-item">
+                        <a href="/kategoria/zamow" class="nav-link category-link" style="background-color: #81c134; color: #fff;">Zamów online</a>
+                    </li> -->
+                </ul>
+            </div>
+            <hr style="border: 1px solid black; margin: 20px 0;">
+        </div>
+    </nav>
+</body>

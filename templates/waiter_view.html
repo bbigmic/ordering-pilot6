@@ -1,0 +1,205 @@
+{% extends "base.html" %}
+
+{% block title %}Widok Kelnera{% endblock %}
+
+{% block content %}
+<h1>Widok Kelnera</h1>
+
+<div id="active-notifications" class="notifications"></div>
+
+<div id="orders" class="orders">
+    {% for order in orders %}
+        <div class="order" id="order-{{ order.id }}">
+            <h2>Zamówienie nr {{ order.order_number }} - Stolik nr {{ order.table_id }}</h2>
+            <p>Status: {{ order.status }} <a> id: {{ order.id }}</a></p>
+            <p>Łączna cena: {{ order.total_price }} PLN</p>
+            <p>Godzina zamówienia: {{ order.created_at.strftime("%H:%M") }}</p>
+            <h3>Szczegóły zamówienia:</h3>
+            <ul>
+                {% for item in order.order_items %}
+                    <li>
+                        {{ item.menu_item.name }} - Ilość: {{ item.quantity }} - Cena: {{ item.menu_item.price }} PLN
+                        {% if item.customization %}
+                            <br><em>Personalizacja: {{ item.customization }}</em>
+                        {% endif %}
+                        {% if item.takeaway %}
+                            <strong>[Na wynos]</strong>
+                        {% endif %}
+                    <hr>
+                    </li>
+                {% endfor %}
+            </ul>
+            <div id="order-action-{{ order.id }}">
+                {% if order.status == "Pending" %}
+                    <label for="realization-time-{{ order.id }}">Wpisz czas realizacji (minuty):</label>
+                    <input type="number" id="realization-time-{{ order.id }}" min="1" placeholder="np. 15">
+                    <button onclick="acceptOrder({{ order.id }})" class="status-btn">Przyjmij zamówienie</button>
+                {% elif order.status == "Accepted" %}
+                    <form action="{{ url_for('update_order_status', order_id=order.id) }}" method="post">
+                        <button type="submit" class="status-btn">Zamówienie zrealizowane</button>
+                    </form>
+                {% endif %}
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+
+<a href="{{ url_for('order_history') }}" class="history-link">Zobacz historię zrealizowanych zamówień</a>
+
+<script>
+    // Śledzenie zamówień, które już są wyświetlane
+    const displayedOrders = new Set();
+
+    // Dodaj istniejące zamówienia do zbioru displayedOrders
+    {% for order in orders %}
+        displayedOrders.add({{ order.id }});
+    {% endfor %}
+
+    function dismissNotification(orderId, callType) {
+        // Ukrywanie powiadomienia wizualnie
+        document.getElementById(`notification-${orderId}-${callType}`).style.display = 'none';
+
+        // Wysłanie odpowiedniego zapytania w zależności od typu powiadomienia
+        const endpoint = callType === "Wezwanie kelnera" ? `/dismiss_call/${orderId}` : `/dismiss_bill/${orderId}`;
+
+        fetch(endpoint, { method: 'POST' })
+            .then(response => response.json())
+            .then(data => console.log("Powiadomienie zamknięte:", data))
+            .catch(error => console.error("Błąd przy zamykaniu powiadomienia:", error));
+    }
+
+    function checkForNewCalls() {
+        fetch('/check_waiter_calls')
+            .then(response => response.json())
+            .then(calls => {
+                const notificationsDiv = document.getElementById("active-notifications");
+                notificationsDiv.innerHTML = '';
+                calls.forEach(call => {
+                    const notification = document.createElement("div");
+                    notification.classList.add("notification");
+                    notification.id = `notification-${call.order_id}-${call.call_type}`;
+
+                    let message = call.call_type === "Wezwanie kelnera"
+                        ? `Zamówienie nr ${call.order_number}: Wezwanie do stolika nr ${call.table_id} <br> Czas wezwania: ${call.call_time}`
+                        : `Zamówienie nr ${call.order_number}: Prośba o rachunek do stolika nr ${call.table_id} <br>
+                           <strong>Płatność:</strong> ${call.payment_method || "Nie podano"} <br>
+                           <strong>Napiwek:</strong> ${"+"+call.tip+" PLN" || "0 PLN"} <br>
+                           ${call.nip ? `<strong>NIP:</strong> ${call.nip}` : ""} <br>
+                           Czas wezwania: ${call.call_time}`;
+
+                    notification.innerHTML = `
+                        <p>${message}</p>
+                        <button onclick="dismissNotification(${call.order_id}, '${call.call_type}')">Zamknij</button>
+                    `;
+                    notificationsDiv.appendChild(notification);
+                });
+            })
+            .catch(error => console.error("Błąd przy pobieraniu powiadomień:", error));
+    }
+
+function updateOrders() {
+    fetch('/check_new_orders')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Błąd serwera: ${response.status} - ${response.statusText}`);
+            }
+            return response.json();
+        })
+        .then(orders => {
+            console.log("Otrzymane zamówienia:", orders);
+
+            const ordersDiv = document.getElementById("orders");
+            orders.forEach(order => {
+                if (!document.getElementById(`order-${order.order_id}`)) {
+                    const orderDiv = document.createElement("div");
+                    orderDiv.classList.add("order");
+                    orderDiv.id = `order-${order.order_id}`;
+
+                    // W zależności od statusu generujemy odpowiedni przycisk
+                    let buttonHTML;
+                    if (order.status === "Pending") {
+                        buttonHTML = `
+                            <label for="realization-time-${order.order_id}">Wpisz czas realizacji (minuty):</label>
+                            <input type="number" id="realization-time-${order.order_id}" min="1" placeholder="np. 15">
+                            <button onclick="acceptOrder(${order.order_id})" class="status-btn">Przyjmij zamówienie</button>
+                        `;
+                    } else if (order.status === "Accepted") {
+                        buttonHTML = `
+                            <form action="/update_order_status/${order.order_id}" method="post">
+                                <button type="submit" class="status-btn">Zamówienie zrealizowane</button>
+                            </form>
+                        `;
+                    }
+
+                    orderDiv.innerHTML = `
+                        <h2>Zamówienie nr ${order.order_number} - Stolik nr ${order.table_id}</h2>
+                        <p>Status: ${order.status} <a> id: ${order.order_id}</a></p>
+                        <p>Łączna cena: ${order.total_price} PLN</p>
+                        <p>Godzina zamówienia: ${order.order_time}</p>
+                        <h3>Szczegóły zamówienia:</h3>
+                        <ul>
+                            ${order.items.map(item => `
+                                <li>
+                                    ${item.name} - Ilość: ${item.quantity} - Cena: ${item.price} PLN
+                                    ${item.takeaway ? `<strong>[Na wynos]</strong>` : ""}
+                                    ${item.customization ? `<br><em>Personalizacja: ${item.customization}</em>` : ""} <hr>
+                                </li>
+                            `).join("")}
+                        </ul>
+                        <div id="order-action-${order.order_id}">
+                            ${buttonHTML}
+                        </div>
+                    `;
+                    ordersDiv.appendChild(orderDiv);
+                }
+            });
+        })
+        .catch(error => console.error("Błąd przy pobieraniu zamówień:", error));
+}
+
+function acceptOrder(orderId) {
+    const realizationTimeInput = document.getElementById(`realization-time-${orderId}`);
+    const realizationTime = parseInt(realizationTimeInput.value);
+
+    if (!realizationTime || realizationTime <= 0) {
+        alert("Proszę wprowadzić poprawny czas realizacji w minutach.");
+        return;
+    }
+
+    fetch(`/accept_order/${orderId}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ realization_time: realizationTime })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'success') {
+            alert("Zamówienie zostało przyjęte!");
+            const actionDiv = document.getElementById(`order-action-${orderId}`);
+            actionDiv.innerHTML = `
+                <form action="/update_order_status/${orderId}" method="post">
+                    <button type="submit" class="status-btn">Zamówienie zrealizowane</button>
+                </form>
+            `;
+        } else {
+            alert(data.message || "Wystąpił błąd przy aktualizacji zamówienia.");
+        }
+    })
+    .catch(error => console.error("Błąd przy akceptacji zamówienia:", error));
+}
+
+
+
+
+    // Odświeżaj powiadomienia co kilka sekund
+    setInterval(() => {
+        checkForNewCalls();
+        updateOrders();
+    }, 5000);
+
+    // Inicjalizacja powiadomień i zamówień
+    checkForNewCalls();
+    updateOrders();
+</script>
+{% endblock %}

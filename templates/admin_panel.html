@@ -1,0 +1,140 @@
+{% extends "admin_base.html" %}
+
+{% block title %}Panel Administratora{% endblock %}
+
+{% block content %}
+<h1>Panel Administratora - Zarządzanie Menu</h1>
+
+<h2>Dodaj Nowe Danie</h2>
+<form action="/add_menu_item" method="POST" enctype="multipart/form-data" class="form">
+    <label for="name">Nazwa:</label>
+    <input type="text" id="name" name="name" required><br>
+    
+    <label for="description">Opis:</label>
+    <textarea id="description" name="description"></textarea><br>
+    
+    <label for="price">Cena:</label>
+    <input type="number" step="0.01" id="price" name="price" required><br>
+
+    <label><input type="checkbox" name="contains_alcohol"> Zawiera alkohol</label><br>
+    
+    <label for="category">Kategoria:</label>
+    <select id="category" name="category" required onchange="toggleDisplayDateField()">
+
+        <option value="Przystawki">Przystawki</option>
+        <option value="Śniadania">Śniadania</option>
+        <option value="Kanapki">Kanapki</option>
+        <option value="Zupy">Zupy</option>
+        <option value="Bowle">Bowle</option>
+        <option value="Dania główne">Dania główne</option>
+        <option value="Dania dla dzieci">Dania dla dzieci</option>
+        <option value="Sałatki">Sałatki</option>
+        <option value="Desery">Desery</option>
+        <option value="Napoje ciepłe">Napoje ciepłe</option>
+        <option value="Napoje zimne">Napoje zimne</option>
+        <option value="Napoje specjalne">Napoje specjalne</option>
+        <option value="Alkohole">Alkohole</option>
+        <option value="Lunch dnia">Lunch dnia</option>
+        <option value="Deser dnia">Deser dnia</option>
+    </select><br>
+    
+    <!-- Pole wyboru daty dla "Lunch dnia" i "Deser dnia", domyślnie ukryte -->
+    <div id="display-date-field" style="display: none;">
+        <label for="display_date">Wybierz datę wyświetlania (tylko dla Lunch dnia lub Deser dnia):</label>
+        <input type="date" id="display_date" name="display_date">
+    </div>
+    
+    <label for="image">Zdjęcie:</label>
+    <input type="file" id="image" name="image" accept="image/*"><br>
+    
+    <label><input type="checkbox" name="customizable"> Możliwość dodawania uwag do dania </label><br>
+
+    <button type="submit">Dodaj</button>
+</form>
+
+<h2>Aktualne Menu</h2>
+<div id="menu-items">
+    {% for item in menu_items %}
+        <div class="menu-item">
+            <!-- Wyświetlanie zdjęcia dania -->
+            {% if item.image_filename %}
+                <img src="{{ url_for('uploaded_file', filename=item.image_filename) }}" alt="{{ item.name }}" class="menu-item-image">
+            {% endif %}
+
+            <!-- Formularz aktualizacji -->
+            <form action="/edit_menu_item/{{ item.id }}" method="POST" enctype="multipart/form-data" class="form">
+                <label for="name">Nazwa:</label>
+                <input type="text" name="name" value="{{ item.name }}" required><br>
+                
+                <label for="description">Opis:</label>
+                <textarea name="description">{{ item.description }}</textarea><br>
+                
+                <label for="price">Cena:</label>
+                <input type="number" step="0.01" name="price" value="{{ item.price }}" required><br>
+
+                <label><input type="checkbox" name="contains_alcohol" {% if item.contains_alcohol %}checked{% endif %}> Zawiera alkohol</label><br>
+                
+                <p><strong>Kategoria:</strong> {{ item.category }}</p>
+
+                <label for="category">Zmień kategorię na:</label>
+                <select name="category" required>
+                    <option value="Przystawki" {% if item.category == "Przystawki" %}selected{% endif %}>Przystawki</option>
+                    <option value="Śniadania" {% if item.category == "Śniadania" %}selected{% endif %}>Śniadania</option>
+                    <option value="Kanapki" {% if item.category == "Kanapki" %}selected{% endif %}>Kanapki</option>
+                    <option value="Zupy" {% if item.category == "Zupy" %}selected{% endif %}>Zupy</option>
+                    <option value="Bowle" {% if item.category == "Bowle" %}selected{% endif %}>Bowle</option>
+                    <option value="Dania główne" {% if item.category == "Dania główne" %}selected{% endif %}>Dania główne</option>
+                    <option value="Dania dla dzieci" {% if item.category == "Dania dla dzieci" %}selected{% endif %}>Dania dla dzieci</option>
+                    <option value="Sałatki" {% if item.category == "Sałatki" %}selected{% endif %}>Sałatki</option>
+                    <option value="Desery" {% if item.category == "Desery" %}selected{% endif %}>Desery</option>
+                    <option value="Napoje ciepłe" {% if item.category == "Napoje ciepłe" %}selected{% endif %}>Napoje ciepłe</option>
+                    <option value="Napoje zimne" {% if item.category == "Napoje zimne" %}selected{% endif %}>Napoje zimne</option>
+                    <option value="Napoje specjalne" {% if item.category == "Napoje specjalne" %}selected{% endif %}>Napoje specjalne</option>
+                    <option value="Alkohole" {% if item.category == "Alkohole" %}selected{% endif %}>Alkohole</option>
+                </select><br>
+                
+                <label for="image">Zmień Zdjęcie:</label>
+                <input type="file" name="image" accept="image/*"><br>
+                
+                <label><input type="checkbox" name="customizable" {% if item.customizable %}checked{% endif %}> Możliwość personalizacji</label><br>
+                <label><input type="checkbox" name="available" {% if item.available %}checked{% endif %}> Dostępne</label><br>
+                <button type="submit">Zaktualizuj</button>
+            </form>
+
+            <!-- Formularz usunięcia -->
+
+                <form action="/delete_menu_item/{{ item.id }}" method="POST" style="display:inline;">
+                    <button type="submit" class="delete-btn" onclick="confirmDeletion(this)">Usuń</button>
+                </form>
+
+        </div>
+    {% endfor %}
+</div>
+
+<script>
+    // Pokazuje lub ukrywa pole daty, jeśli wybrano Lunch dnia lub Deser dnia
+    function toggleDisplayDateField() {
+        const category = document.getElementById("category").value;
+        const dateField = document.getElementById("display-date-field");
+        dateField.style.display = (category === "Lunch dnia" || category === "Deser dnia") ? "block" : "none";
+    }
+
+    // Wywołanie funkcji po załadowaniu strony
+    document.addEventListener("DOMContentLoaded", toggleDisplayDateField);
+
+    function confirmDeletion(button) {
+        const confirmation = confirm("Czy na pewno chcesz to usunąć?");
+        if (confirmation) {
+            // Jeśli potwierdzone, wykonaj usunięcie
+            const form = button.closest('form'); // Znajdź najbliższy formularz otaczający przycisk
+            if (form) {
+                form.submit(); // Wyślij formularz
+            } else {
+                console.error("Brak formularza do przesłania.");
+            }
+        }
+    }
+
+</script>
+
+{% endblock %}

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strona Główna - PAPU Kitchen</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <!-- Owl Carousel CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/cards/cards.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+</head>
+<body>
+
+    <!-- Navbar -->
+    {% include 'navbar.html' %}
+
+
+
+
+
+    <div class="text-page">
+        <section class="header">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <h1 class="pt-5 pb-3">Regulamin sklepu internetowego</h1>
+                        <h3>I. INFORMACJE OGÓLNE:</h3>
+                        <p>
+                            Podmiotem odpowiedzialnym za funkcjonowanie sklepu internetowego działającego pod adresem
+                            www.papu.kitchen&nbsp;jest&nbsp;MIO Spółka z o.o&nbsp;z siedzibą w 42-202 Częstochowa, ul. Wrocławska 10;
+                            NIP: 573-293-01-84; o numerze REGON: 520289972 (dalej zwana „MIO” lub „Sklepem”).</p>
+                        <p>Sklep prowadzi sprzedaż towarów za pośrednictwem Internetu, bez ograniczeń terytorialnych
+                            oraz czasowych – możliwość złożenia zamówień 24 godziny na dobę, 7 dni w tygodniu.</p>
+                        <p>Oferta Sklepu zamieszczana jest na stronie internetowej pod adresem www.papu.kitchen</p>
+                        <p>Klientem Sklepu może być osoba fizyczna posiadająca pełną lub ograniczoną zdolność do
+                            czynności prawnych oraz osoba prawna lub jednostka organizacyjna nieposiadająca osobowości
+                            prawnej, zdolne do zaciągania zobowiązań we własnym imieniu i na własny rachunek</p>
+                        <h3>II. ZAMÓWIENIA</h3>
+                        <p>Do dokonywania zakupów w Sklepie nie jest wymagane założenie konta, natomiast niezbędne jest
+                            posiadanie aktywnego konta poczty elektronicznej oraz podanie podstawowych danych, w tym
+                            danych osobowych i kontaktowych, umożliwiających prawidłowy przebieg realizacji zamówienia,
+                            w tym kontakt i wysyłkę towaru.</p>
+                        <p>Zamówienia przyjmowane są za pośrednictwem strony internetowej www.papu.kitchen</p>
+                        <p>Klient składając zamówienie określa rodzaj, ilość oraz sposób odbioru lub dostawy zamawianego
+                            towaru (produktu).</p>
+                        <p>W trakcie składania Zamówienia – do momentu potwierdzenia zakupu poprzez przycisk „Złóż
+                            zamówienie” – Klient ma możliwość modyfikacji wszystkich wprowadzanych danych.</p>
+                        <p>Po złożeniu zamówienia Klient otrzymuje na wskazany przez niego adres e-mail, automatycznie
+                            generowany przez Sklep list elektroniczny ze szczegółami zamówienia.</p>
+                        <p>Klient zostaje powiadomiony o przyjęciu lub odmowie przyjęcia zamówienia do realizacji na
+                            adres e-mail wskazany w zamówieniu. W przypadku odmowy przyjęcia zamówienia do realizacji
+                            Sklep informuje o tym fakcie Klienta drogą mailową i zwraca mu całą otrzymaną od niego
+                            należność, jeżeli wybrał formę przedpłaty.</p>
+                        <p>W przypadku niedostępności części towarów objętych zamówieniem Klient jest niezwłocznie
+                            informowany o tym fakcie i podejmuje decyzję o sposobie realizacji zamówienia tylko
+                            częściowej realizacji albo anulowania całości zamówienia.</p>
+                        <p>W powyższym przypadku, Sklep zwraca Klientowi częściową lub całą uiszczoną wcześniej
+                            należność niezwłocznie, ale nie później niż w terminie 14 dni.</p>
+                        <p>Sklep zastrzega sobie prawo do organizowania czasowych promocji na towary. Zasady promocji, w
+                            tym sposoby dostawy towaru, sposoby płatności oraz ceny oferowanych produktów obowiązują do
+                            terminu obowiązywania danej akcji promocyjnej, odwołania akcji promocyjnej lub do
+                            wyczerpania zapasu promocyjnych produktów.</p>
+                        <h3>III. DANE OSOBOWE</h3>
+                        <p>Dane osobowe przekazywane przez Klientów w trakcie dokonywania zamówienia są przetwarzane
+                            przez MIO (Administratora Danych Osobowych, w rozumieniu przepisów ustawy z dnia 29 sierpnia
+                            1997 r. o ochronie danych osobowych – tekst jednolity: Dz. U. 2002 r. Nr 101 poz. 926)
+                            wyłącznie do użytku wewnętrznego Sklepu, w celu realizacji zamówień oraz mogą być
+                            przetwarzane w celach marketingowych, o ile Klient wyrazi na to zgodę przy składaniu
+                            zamówienia. Wyrażenie zgody na przetwarzanie danych osobowych na cele marketingowe jest
+                            dobrowolne i nie stanowi warunku realizacji zamówienia złożonego w Sklepie.</p>
+                        <p>Klienci mają prawo wglądu i wnoszenia poprawek do ich danych osobowych oraz do wyrażenia
+                            sprzeciwu, co do ich przetwarzana, jak również mają prawo żądania zaprzestania ich
+                            przetwarzania w ogóle, co jednak wiązać się może z niemożliwością realizacji złożonego
+                            zamówienia.</p>
+                        <h3>IV. CENY TOWARÓW / FORMY PŁATNOŚCI</h3>
+                        <p>Wszystkie ceny towarów podawane są w złotych polskich, zawierają podatek od towarów i usług
+                            (VAT), nie zawierają jednak kosztów wysyłki. O łącznej cenie wraz z podatkami, a także o
+                            kosztach dostawy oraz o innych kosztach klient jest informowany w trakcie składania
+                            zamówienia.</p>
+                        <p>Sklep zastrzega sobie prawo do zmiany cen towarów znajdujących się w ofercie Sklepu,
+                            wprowadzania nowych towarów do oferty Sklepu, przeprowadzania i odwoływania akcji
+                            promocyjnych na stronach Sklepu bądź wprowadzania w nich zmian, zgodnie z niniejszym
+                            Regulaminem lub regulaminami danej promocji. Wprowadzone zmiany nie mogą wpływać na
+                            skuteczność oraz sposób wykonania złożonych wcześniej zamówień.&nbsp;</p>
+                        <p>Do każdego zamówienia wystawiany jest paragon, zaś faktura na wyraźne życzenie Klienta.
+                            Dokument sprzedaży (paragon albo faktura) wystawiana jest w chwili, gdy wszystkie towary
+                            wybrane do zamówienia są skompletowane i przygotowane do wysłania. W przypadku wysyłania
+                            towaru partiami, paragon albo faktura, obejmująca daną partię, zostaje wystawiona w chwili
+                            skompletowania i przygotowania danej partii do wysyłki.</p>
+                        <p>Klient może zapłacić za zamówione towary za pośrednictwem systemu płatności elektronicznych
+                            PAYNow bądź za pobraniem.</p>
+                        <h3>V. CZAS REALIZACJI ZAMÓWIENIA I DOSTAWA</h3>
+                        <p>Dostawa przesyłek realizowana jest za pośrednictwem kurierow. Zamówienia można również
+                            odebrać osobiście w siedzibie MIO (Restauracja PAPU).</p>
+                        <p>Domyślnie za adres dostawy przyjmuje się adres wskazany przez Klienta podczas rejestracji w
+                            Sklepie.</p>
+                        <p>Sklep nie ponosi odpowiedzialności za niedostarczenie towaru lub opóźnienie w dostawie
+                            spowodowane błędnym lub niedokładnym adresem podanym przez Klienta.</p>
+                        <h3>VI. REKLAMACJE, WYMIANA i ODSTAPIENIE OD UMOWY</h3>
+                        <p>Odstąpienie od internetowego zamówienia na przygotowanie posiłku wybranego z menu
+                            restauracji, czyli ze standardowej oferty restauratora, nie jest możliwe, ponieważ
+                            przedmiotem zamówienia jest rzecz ulegająca szybkiemu zepsuciu i mająca krótki termin
+                            przydatności do spożycia.</p>
+                        <p>Konsumentowi nie przysługuje prawo do zwrotu przygotowanego dla niego posiłku z uwagi art. 38
+                            ust. 5 ustawy o prawach konsumenta, to jest z uwagi na fakt, iż przedmiotem zamówienia jest
+                            posiłek dostarczony w opakowaniu. Otwarcie opakowania z jedzeniem spowoduje, że ze względów
+                            higienicznych, a także z uwagi na ochronę zdrowia, niemożliwa stanie się powtórna sprzedaż i
+                            późniejsza konsumpcja przygotowanego dania. Należy wskazać, że dla pozbawienia konsumenta
+                            prawa odstąpienia od umowy wystarczy ziszczenie się/wykazanie jednej z powyżej wskazanych
+                            przesłanek.</p>
+                        <h3>VII. POSTANOWIENIA KOŃCOWE</h3>
+                        <p>Minimalne wymagania techniczne niezbędne do korzystania z systemu teleinformatycznego Sklepu
+                            to komputer lub urządzenie mobilne z systemem co najmniej Windows XP i przeglądarką
+                            internetową co najmniej IE 7.x, Firefox, Opera, Safari, Chrome.</p>
+                        <p>Wszelkie spory wynikłe w związku z realizowaniem umów sprzedaży między Sklepem, a Klientem
+                            będą rozstrzygane w pierwszej kolejności na drodze negocjacji, z intencją polubownego
+                            zakończenia sporu. W przypadku braku możliwości zawarcia ugodowego rozstrzygnięcia sporu
+                            każda ze stron będzie uprawniona do skierowania sprawy do właściwego rzeczowo i miejscowo
+                            sądu powszechnego.</p>
+                        <p>Klient może skorzystać z pozasądowych sposobów rozpatrywania reklamacji i dochodzenia
+                            roszczeń w formie polubownego rozwiązywania sporów dotyczących zakupów internetowych,
+                            składając swoją skargę np. za pośrednictwem unijnej platformy internetowej ODR, dostępnej
+                            pod adresem: https://ec.europa.eu/consumers/odr/.</p>
+                        <p>W sprawach nieuregulowanych w niniejszym Regulaminie mają zastosowanie właściwe przepisy
+                            prawa, w tym ustawy Kodeks Cywilny oraz ustawy o prawach konsumenta.</p>
+                        <p>Niniejszy Regulamin obowiązuje od dnia 01.01.2022 r.</p>
+                        <p>Sklep zastrzega sobie prawo do zmiany Regulaminu. Wszelkie zmiany Regulaminu obowiązują od
+                            daty powiadomienia Klientów o zmianie przez opublikowania ich na stronie www.papu.kitchen w
+                            sposób zapewniający możliwość klientów do zapoznania się z takimi zmianami. Wprowadzone
+                            zmiany nie mogą wpływać na skuteczność oraz sposób wykonania złożonych wcześniej
+                            zamówień.</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section class="hero text-center py-5">
+            „Dobrzy ludzie, dobre jedzenie, dobry czas“
+        </section>
+    </div>
+
+
+
+
+        <!-- Stopka -->
+    {% include 'footer.html' %}
+
+    <!-- jQuery, Popper.js, and Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <!-- Owl Carousel JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
+    <!-- Owl Carousel Initialization -->
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zupy, desery, przystawki - PAPU Kitchen</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <!-- Owl Carousel CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/cards/cards.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+</head>
+<body>
+
+    <!-- Navbar -->
+    {% include 'navbar.html' %}
+
+
+
+
+
+
+    <div class="text-page">
+        <section class="header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-lg-6">
+                        <h1 class="pb-3">Zupy</h1>
+                        <p>Tradycyjny rosół, a może lekki chłodnik? Wolisz aksamitne zupy krem, czy może gęste i różnorodne zupy warzywne? Sprawdź nasze propozycje i ciesz się smakiem najlepszych warzyw!</p>
+                        <h1 class="pb-3">Desery</h1>
+                        <p>Chyba każdy z nas ma swój ulubiony deser. To może być beza z lokalnej cukierni, szarlotka mamy lub truskawki z przydomowego ogródka okraszone bitą śmietaną. Jednak nic nie stoi na przeszkodzie, by chociaż spróbować deserów w PAPU. </p>
+                        <p>Nasze desery to przede wszystkim wyśmienite puszyste torty biszkoptowe i bezowe, desery ze świeżymi owocami, sernik domowy, jabłecznik jak również przepyszne lody. </p>
+                        <p>Każdy z nas miewa ochotę na coś słodkiego. Owocowe lody, aromatyczne ciasta, kruche tarty i inne smakołyki potrafią kusić naprawdę skutecznie.</p>
+                    </div>
+                    <div class="col-12 col-lg-6">
+                        <div class="image-holder" style="background-image: url('/static/images/zupy.jpg')"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="hero text-center py-5">
+            „Dobrzy ludzie, dobre jedzenie, dobry czas“
+        </section>
+
+        <section class="category-section">
+            <div class="container my-5">
+                <h2 class="text-center">Zupy</h2>
+                <div class="row">
+                    {% for item in zupy_items %}
+                        <div class="col-md-4 my-3">
+                            <div class="card">
+                                {% if item.image_filename %}
+                                    <img src="{{ url_for('uploaded_file', filename=item.image_filename) }}" class="card-img-top" alt="{{ item.name }}">
+                                {% endif %}
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ item.name }}</h5>
+                                    <p class="card-text">{{ item.description }}</p>
+                                    <p class="card-text"><strong>Cena:</strong> {{ item.price }} PLN</p>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+
+        <section class="category-section">
+            <div class="container my-5">
+                <h2 class="text-center">Desery</h2>
+                <div class="row">
+                    {% for item in desery_items %}
+                        <div class="col-md-4 my-3">
+                            <div class="card">
+                                {% if item.image_filename %}
+                                    <img src="{{ url_for('uploaded_file', filename=item.image_filename) }}" class="card-img-top" alt="{{ item.name }}">
+                                {% endif %}
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ item.name }}</h5>
+                                    <p class="card-text">{{ item.description }}</p>
+                                    <p class="card-text"><strong>Cena:</strong> {{ item.price }} PLN</p>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+
+        <section class="category-section">
+            <div class="container my-5">
+                <h2 class="text-center">Przystawki</h2>
+                <div class="row">
+                    {% for item in przystawki_items %}
+                        <div class="col-md-4 my-3">
+                            <div class="card">
+                                {% if item.image_filename %}
+                                    <img src="{{ url_for('uploaded_file', filename=item.image_filename) }}" class="card-img-top" alt="{{ item.name }}">
+                                {% endif %}
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ item.name }}</h5>
+                                    <p class="card-text">{{ item.description }}</p>
+                                    <p class="card-text"><strong>Cena:</strong> {{ item.price }} PLN</p>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+    </div>
+
+
+
+
+        <!-- Stopka -->
+    {% include 'footer.html' %}
+
+    <!-- jQuery, Popper.js, and Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <!-- Owl Carousel JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
+    <!-- Owl Carousel Initialization -->
+</body>
+</html>

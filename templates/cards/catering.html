@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catering - PAPU Kitchen</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <!-- Owl Carousel CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/cards/cards.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+</head>
+<body>
+
+    <!-- Navbar -->
+    {% include 'navbar.html' %}
+
+
+
+
+
+    <div class="text-page">
+        <section class="header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-lg-6">
+                        <h1 class="pb-3">CATERING NA KAŻDĄ OKAZJĘ 🍽️
+                        </h1>
+                        <p>
+                            
+                        </p>
+                        <p>
+                            Nasza restauracja oferuje kompleksową usługę cateringową, idealną na każdą okazję – od małych spotkań rodzinnych po duże imprezy firmowe. Z pasją i zaangażowaniem dostarczamy pyszne, świeże dania, które zachwycą Twoich gości i stworzą <strong>niezapomnianą atmosferę</strong>.
+                        </p>
+                        <p>
+                            *Dostosowane do Twoich Potrzeb*
+                        </p>
+                        <p>
+                            Oferujemy szeroką gamę menu cateringowych, które dostosowujemy do indywidualnych potrzeb i gustów naszych klientów. Bez względu na to, czy organizujesz przyjęcie weselne, konferencję, bankiet, czy kameralne spotkanie, zapewniamy profesjonalną obsługę i jedzenie najwyższej jakości.
+
+Skontaktuj się z nami, aby omówić szczegóły i zamówić catering, który idealnie pasuje do charakteru Twojego wydarzenia. Zaufaj nam, a my zadbamy o każdy detal!
+                        </p>
+                    </div>
+                    <div class="col-12 col-lg-6">
+                        <div class="image-holder" style="background-image: url(https://papu.kitchen/media/cache/static_page/build/images/o_nas.ade3b099.jpg)"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="hero text-center py-5">
+            „Dobrzy ludzie, dobre jedzenie, dobry czas“
+        </section>
+    </div>
+
+
+
+
+        <!-- Stopka -->
+    {% include 'footer.html' %}
+
+    <!-- jQuery, Popper.js, and Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <!-- Owl Carousel JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
+    <!-- Owl Carousel Initialization -->
+</body>
+</html>

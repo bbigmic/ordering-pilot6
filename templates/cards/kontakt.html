@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strona Główna - PAPU Kitchen</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <!-- Owl Carousel CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/cards/cards.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+</head>
+<body>
+
+    <!-- Navbar -->
+    {% include 'navbar.html' %}
+
+
+
+
+
+    <div class="text-page">
+        <section class="header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-lg-6">
+                        <h1 class="pt-5 pb-3">Kontakt</h1>
+                        <p>
+                            <strong>Restauracja PAPU</strong>
+                        </p>
+                        <p>
+                            ul. Wrocławska 10<br>
+                            42-202 Częstochowa
+                        </p>
+                        <p>
+                            tel. 690 245 531
+                        </p>
+                        <p>
+                            kontakt@papu.kitchen
+                        </p>
+                    </div>
+                    <div class="col-12 col-lg-6">
+                        <div class="image-holder" style="background-image: url(https://papu.kitchen/media/cache/static_page/build/images/dancing_couple.44204791.png)"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="hero text-center py-5">
+            „Dobrzy ludzie, dobre jedzenie, dobry czas“
+        </section>
+    </div>
+
+
+
+
+        <!-- Stopka -->
+    {% include 'footer.html' %}
+
+    <!-- jQuery, Popper.js, and Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <!-- Owl Carousel JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
+    <!-- Owl Carousel Initialization -->
+</body>
+</html>

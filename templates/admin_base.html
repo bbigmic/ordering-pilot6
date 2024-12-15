@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Panel Administratora{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin_base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <button class="toggle-sidebar" onclick="toggleSidebar()">&#9776;</button>
+            <h2>Panel Administratora</h2><hr>
+            <ul>
+                <li class="sidebar-item"><a href="{{ url_for('admin_panel') }}">Aktualne Menu</a></li>
+                <li class="sidebar-item"><a href="{{ url_for('add_tables') }}">Stoliki</a></li>
+                <li class="sidebar-item"><a href="{{ url_for('add_events') }}">Wydarzenia</a></li>
+                <li class="sidebar-item"><a href="{{ url_for('admin_add_popup') }}">Pop-up</a></li>
+            </ul>
+        </nav>
+        <!-- Main Content Area -->
+        <div class="main-content">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+</body>
+<script>
+    function toggleSidebar() {
+        const sidebar = document.querySelector('.sidebar');
+        sidebar.classList.toggle('collapsed');
+    }
+</script>
+</html>

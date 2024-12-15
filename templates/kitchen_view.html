@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}Widok Kuchni{% endblock %}
+
+{% block content %}
+<h1>Widok Kuchni</h1>
+
+<div id="accepted-orders" class="orders">
+    <!-- Dynamicznie ładowane zamówienia ze statusem "Accepted" -->
+</div>
+
+<script>
+    function fetchAcceptedOrders() {
+        fetch('/check_accepted_orders')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Błąd serwera: ${response.status} - ${response.statusText}`);
+                }
+                return response.json();
+            })
+            .then(orders => {
+                const ordersDiv = document.getElementById("accepted-orders");
+                ordersDiv.innerHTML = ""; // Wyczyść poprzednie zamówienia
+
+                orders.forEach(order => {
+                    const orderDiv = document.createElement("div");
+                    orderDiv.classList.add("order");
+                    orderDiv.id = `order-${order.order_id}`;
+
+                    orderDiv.innerHTML = `
+                        <h2>Zamówienie nr ${order.order_number} - Stolik nr ${order.table_id}</h2>
+                        <p>Status: ${order.status} <a> id: ${order.order_id}</a></p>
+                        <p>Łączna cena: ${order.total_price} PLN</p>
+                        <p>Godzina zamówienia: ${order.order_time}</p>
+                        <h3>Szczegóły zamówienia:</h3>
+                        <ul>
+                            ${order.items.map(item => `
+                                <li>
+                                    ${item.name} - Ilość: ${item.quantity} - Cena: ${item.price} PLN
+                                    ${item.takeaway ? `<strong>[Na wynos]</strong>` : ""}
+                                    ${item.customization ? `<br><em>Personalizacja: ${item.customization}</em>` : ""} <hr>
+                                </li>
+                            `).join("")}
+                        </ul>
+                    `;
+                    ordersDiv.appendChild(orderDiv);
+                });
+            })
+            .catch(error => console.error("Błąd przy pobieraniu zamówień:", error));
+    }
+
+    // Odświeżanie listy zamówień co kilka sekund
+    setInterval(fetchAcceptedOrders, 5000);
+    fetchAcceptedOrders(); // Początkowe załadowanie zamówień
+</script>
+{% endblock %}

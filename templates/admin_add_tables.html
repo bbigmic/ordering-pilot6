@@ -1,0 +1,25 @@
+{% extends "admin_base.html" %}
+
+{% block title %}Dodawanie Stoliki i Generowanie QR Kodów{% endblock %}
+
+{% block content %}
+<h1>Dodaj Stoliki</h1>
+<form method="POST">
+    <label for="table_count">Liczba stolików do dodania:</label>
+    <input type="number" id="table_count" name="table_count" min="1" required>
+    <button type="submit">Dodaj Stoliki</button>
+</form>
+
+<h2>Istniejące Stoliki</h2>
+<div class="tables">
+    {% for table in tables %}
+        <div class="table">
+            <p>Stolik ID: {{ table.id }}</p>
+            <img src="{{ url_for('uploaded_file', filename='table_' ~ table.id ~ '.png') }}" 
+                 alt="QR Code for Table {{ table.id }}" 
+                 class="qr-code">
+            <hr>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

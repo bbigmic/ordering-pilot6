@@ -1,0 +1,48 @@
+/* Stopka */
+footer {
+    background-color: #545454;
+    color: #fff;
+    padding: 40px 0;
+}
+footer h4 {
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+}
+footer ul {
+    list-style: none;
+    padding: 0;
+}
+footer ul li {
+    margin-bottom: 5px;
+}
+footer ul li a {
+    color: #81c134;
+    text-decoration: none;
+}
+footer ul li a:hover {
+    color: #e6c200;
+}
+footer .payment-methods {
+    border-top: 1px solid #444;
+    padding-top: 20px;
+
+    margin-top: 20px;
+}
+
+footer .payment-methods .logos svg {
+    height: 40px; /* Stała wysokość ikon */
+    width: auto; /* Automatyczne skalowanie szerokości */
+    margin: 0 10px; /* Odstępy między ikonami */
+    display: inline-block; /* Układ ikon w linii */
+    vertical-align: middle; /* Wyrównanie względem linii tekstu */
+    fill: #ffffff;
+}
+
+footer .payment-methods .logos {
+    text-align: center; /* Wyśrodkowanie ikon */
+    display: flex; /* Flexbox dla lepszego zarządzania układem */
+    justify-content: center; /* Wyśrodkowanie elementów w poziomie */
+    flex-wrap: wrap; /* Automatyczne zawijanie w przypadku braku miejsca */
+    gap: 15px; /* Odstępy między ikonami */
+
+}

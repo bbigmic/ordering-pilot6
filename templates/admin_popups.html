@@ -1,0 +1,29 @@
+{% extends "admin_base.html" %}
+
+{% block title %}Dodaj Pop-up{% endblock %}
+
+{% block content %}
+<h1>Dodaj Pop-up</h1>
+<form action="/admin/add_popup" method="POST" enctype="multipart/form-data" class="form">
+    <label for="popup_image">Wgraj zdjęcie:</label>
+    <input type="file" id="popup_image" name="popup_image" accept="image/*" required>
+    <button type="submit" class="btn btn-primary">Dodaj Pop-up</button>
+</form>
+
+<h2>Aktualny Pop-up</h2>
+{% if popup_image %}
+    <form action="/admin/toggle_popup" method="POST" class="toggle-form">
+        <label class="switch">
+            <input style="display:none" type="checkbox" class="checkbox" name="is_active"
+                    {% if is_active %}checked{% endif %}
+                   onchange="this.form.submit()">
+            <div class="slider"></div>
+        </label>
+    </form>
+    <div class="popup-preview">
+        <img src="{{ url_for('uploaded_file', filename=popup_image) }}" alt="Aktualny Pop-up" style="max-width: 100%;">
+    </div>
+{% else %}
+    <p>Brak wgranego pop-upu.</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends "admin_base.html" %}
+
+{% block title %}Dodaj Wydarzenie{% endblock %}
+
+{% block content %}
+<h1>Dodaj Wydarzenie</h1>
+<form action="/admin/add_events" method="POST" enctype="multipart/form-data" class="form">
+    <label for="title">Tytuł:</label>
+    <input type="text" id="title" name="title" required>
+
+    <label for="description">Opis:</label>
+    <textarea id="description" name="description" required></textarea>
+
+    <label for="start_date">Data rozpoczęcia:</label>
+    <input type="date" id="start_date" name="start_date" required>
+
+    <label for="end_date">Data zakończenia:</label>
+    <input type="date" id="end_date" name="end_date" required>
+
+    <label for="image">Zdjęcie (opcjonalne):</label>
+    <input type="file" id="image" name="image" accept="image/*">
+
+    <button type="submit">Dodaj Wydarzenie</button>
+</form>
+
+<h2>Istniejące Wydarzenia</h2>
+<div class="events">
+    {% for event in events %}
+        <div class="event">
+            <h3>{{ event.title }}</h3>
+            <p>{{ event.description }}</p>
+            <p>Rozpoczęcie: {{ event.start_date.strftime('%Y-%m-%d') }}</p>
+            <p>Zakończenie: {{ event.end_date.strftime('%Y-%m-%d') }}</p>
+            {% if event.image %}
+                <img src="{{ url_for('uploaded_file', filename=event.image) }}" alt="{{ event.title }}" class="event-image">
+            {% endif %}
+            <form action="/delete_event/{{ event.id }}" method="POST">
+                <button type="submit" class="delete-btn">Usuń</button>
+            </form>
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

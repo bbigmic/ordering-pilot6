@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strona Główna - PAPU Kitchen</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <!-- Owl Carousel CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+</head>
+<body>
+
+    <!-- Navbar -->
+    {% include 'navbar.html' %}
+
+    <!-- Pop-up -->
+    <div id="popup-container" style="display: none;">
+        <div id="popup">
+            <span id="close-popup" onclick="closePopup()"><div id="progress-bar"></div>×</span>
+            <img id="popup-image" src="" alt="Pop-up">
+        </div>
+    </div>
+
+    <!-- Main Carousel -->
+    <div>
+        <div class="owl-carousel owl-theme main-slider">
+            
+                <!-- Slide for the Upcoming Event -->
+        {% if upcoming_event and upcoming_event.start_date <= today <= upcoming_event.end_date %}
+            <div class="item-slider" style="background-image: url('{{ url_for('uploaded_file', filename=upcoming_event.image) }}');">
+                <div class="event-info">
+                    <h1>{{ upcoming_event.title }}</h1>
+                    <p>{{ upcoming_event.description }}</p>
+                    <p>Start: {{ upcoming_event.start_date.strftime('%d.%m.%Y') }}</p>
+                    <p>Koniec: {{ upcoming_event.end_date.strftime('%d.%m.%Y') }}</p>
+                </div>
+            </div>
+        {% else %}
+            <div class="item-slider" style="background-image: url('/static/images/slider_no_event.jpg');">
+                <div class="event-info">
+                    <h1>Zapraszamy do naszej pysznej kuchni!</h1>
+                    <p>Codziennie, specjalnie dla was wybieramy najświeższe produkty.</p>
+                </div>
+            </div>
+        {% endif %}
+
+        <!-- Slide for the Next Event in Sequence -->
+        {% if next_event %}
+            <div class="item-slider" style="background-image: url('{{ url_for('uploaded_file', filename=next_event.image) }}');">
+                <div class="event-info">
+                    <h1>{{ next_event.title }}</h1>
+                    <p>{{ next_event.description }}</p>
+<!--                     <p>Start: {{ next_event.start_date.strftime('%d.%m.%Y') }} godz. 8:00</p>
+                    <p>End: {{ next_event.end_date.strftime('%d.%m.%Y') }} godz. 22:00</p> -->
+                </div>
+            </div>
+        {% else %}
+            <div class="item-slider" style="background-image: url('/static/images/slider_no_event2.jpg');">
+                <div class="event-info">
+                    <h1>Stwórzmy razem piękną uroczystość!</h1>
+                    <p>Urodziny, imieniny czy inna uroczystość? <br> Dla nas to nie problem!</p>
+                    <p>W PAPU znajdziesz dobrą energię i wszystko, czego Ci potrzeba!</p>
+                </div>
+            </div>
+        {% endif %}
+
+            <!-- Static Slide for "Order and Collect" -->
+            <div class="item-slider" style="background-image: url('/static/images/order_collect.jpg');">
+                <div class="order-info">
+                    <h1>Zamów i odbierz</h1>
+                    <p>Zadzwoń do nas i zamów swoje jedzenie na odbiór – szybko i wygodnie!</p>
+
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+
+
+    <!-- Category Section -->
+<!--     <section class="homepage-categories mt-5">
+        <div class="category-container">
+            <h2 class="text-center">Nasze Kategorie</h2>
+            <div class="owl-carousel owl-theme category-slider mt-4">
+                <div class="item">
+                    <h3 class="text-center">Śniadania</h3>
+                    <div class="image-holder" style="background-image: url('/static/images/DL5A6237.jpg');"></div>
+                    <p class="text-center mt-3">Ten moment, kiedy budzicie się rano i Waszym marzeniem jest pyszne śniadanie, a w lodówce pusto...</p>
+                </div>
+                <div class="item">
+                    <h3 class="text-center">Bowle</h3>
+                    <div class="image-holder" style="background-image: url('/static/images/DL5A6396.jpg');"></div>
+                    <p class="text-center mt-3">Bowle to nowoczesne sałatki w podawane w okrągłych miskach (bowlach) pełne świeżych i zdrowych...</p>
+                </div>
+                <div class="item">
+                    <h3 class="text-center">Sałatki</h3>
+                    <div class="image-holder" style="background-image: url('/static/images/DL5A6352.jpg');"></div>
+                    <p class="text-center mt-3">Każdy, kto dba o linię, wie, że sałata jest jego przyjacielem, bo składa się w 90 % z wody i ma...</p>
+                </div>
+                <div class="item">
+                    <h3 class="text-center">Dania gorące</h3>
+                    <div class="image-holder" style="background-image: url('/static/images/DL5A6036.jpg');"></div>
+                    <p class="text-center mt-3">Nasze dania są starannie przygotowywane każdego dnia z myślą o jak najlepszym smaku...</p>
+                </div>
+                <div class="item">
+                    <h3 class="text-center">Inne</h3>
+                    <div class="image-holder" style="background-image: url('/static/images/DL5A6293.jpg');"></div>
+                    <p class="text-center mt-3">Tradycyjny rosół, a może lekki chłodnik? Wolisz aksamitne zupy krem, czy może gęste i różnorodne...</p>
+                </div>
+
+
+
+            </div>
+        </div>
+    </section> -->
+
+
+    <section class="call-us">
+        <div class="container text-center">
+            <div class="col col-md-8 mx-auto py-5">
+                <h2>Chcesz dokonać rezerwacji lub złożyć zamówienie - dzwoń do naszej PAPU-babki</h2>
+                <h3 class="d-flex align-items-center justify-content-center mt-3">
+        
+                    <a href="tel:+48690245531" class="nav-link category-link">Zadzwoń</a>
+                    <h2>
+                        <a href="tel:+48690245531" style="color: green">
+                            <img src="/static/images/phone2.png" style="width:50px; text-decoration: none;" alt="phone">
+                            <h2>690 245 531</h2>
+                        </a>
+                    </h2>
+                </h3>
+            </div>
+        </div>
+    </section>
+
+
+
+<!--     <section class="homepage-categories" style="background-color: #ecf2db;">
+        <div class="container">
+            <div class="item">
+                <h2 class="text-center">Zamów jedzenie przez aplikacje</h2>
+                <p class="text-center">
+                    Skorzystaj z naszej aplikacji i zamów jedzenie online!
+                </p>
+                <ul class="navbar-nav w-100 flex-wrap">
+                    <li class="nav-item">
+                        <a href="/kategoria/zamow" class="nav-link category-link">Zamów online</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section> -->
+
+
+        <!-- Stopka -->
+    {% include 'footer.html' %}
+
+    <!-- jQuery, Popper.js, and Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <!-- Owl Carousel JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            fetch('/popup_image')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.image_url && data.is_active) {
+                        const popupContainer = document.getElementById('popup-container');
+                        const popupImage = document.getElementById('popup-image');
+                        const progressBar = document.getElementById('progress-bar');
+                        let progress = 100; // Pasek startuje od 100%
+
+                        popupImage.src = data.image_url;
+                        popupContainer.style.display = 'flex';
+
+                        // Aktualizuj pasek postępu co 100 ms (1% mniej na każde 100 ms)
+                        const progressInterval = setInterval(() => {
+                            progress -= 1; // Odejmuj 1% co 100 ms
+                            progressBar.style.setProperty('--progress', `${progress}%`);
+                            if (progress <= 0) {
+                                clearInterval(progressInterval);
+                                popupContainer.style.display = 'none';
+                            }
+                        }, 100);
+
+                        // Automatyczne zamykanie po 10 sekundach
+                        setTimeout(() => {
+                            clearInterval(progressInterval);
+                            popupContainer.style.display = 'none';
+                        }, 10000);
+                    }
+                });
+        });
+
+        function closePopup() {
+            const popupContainer = document.getElementById('popup-container');
+            const progressBar = document.getElementById('progress-bar');
+
+            popupContainer.style.display = 'none';
+            progressBar.style.setProperty('--progress', `0%`); // Resetuj pasek postępu
+        }
+
+    </script>
+
+
+    <!-- Owl Carousel Initialization -->
+    <script>
+        $(document).ready(function(){
+            $(".main-slider").owlCarousel({
+                loop: true,
+                items: 1,
+                autoplay: true,
+                autoplayTimeout: 5000,
+                nav: false,
+                dots: false
+            });
+
+            $(".category-slider").owlCarousel({
+                loop: true,
+                margin: 10,
+                nav: true,
+                responsive: {
+                    0: { items: 1 },
+                    600: { items: 3 },
+                    1000: { items: 5 }
+                }
+            });
+        });
+    </script>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const carousel = document.querySelector('.main-slider');
+            const container = document.getElementById('carousel-container');
+
+            // Update container background on slide change
+            $('.main-slider').on('changed.owl.carousel', function(event) {
+                const currentSlide = $(event.target).find('.owl-item.active .item');
+                const newBackground = currentSlide.data('background');
+                if (newBackground) {
+                    container.style.backgroundImage = `url('${newBackground}')`;
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strona Główna - PAPU Kitchen</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <!-- Owl Carousel CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/cards/cards.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+</head>
+<body>
+
+    <!-- Navbar -->
+    {% include 'navbar.html' %}
+
+
+
+
+
+    <div class="text-page">
+        <section class="header">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <h1 class="pt-5 pb-3">Polityka ochrony danych osobowych</h1>
+                        <h3 class="text-center">§1</h3>
+                        <p>Niniejszy dokument zatytułowany „Polityka ochrony danych osobowych” (dalej jako Polityka)
+                            stanowi mapę wymogów, zasad i regulacji ochrony danych osobowych w &nbsp;Firmie MIO Spółka z
+                            o.o, z siedzibą w Częstochowie (42-202) przy ul. Wrocławskiej 10, NIP: 642-274-30-63 (dalej
+                            jako MIO).</p>
+                        <p>Niniejsza Polityka jest polityką ochrony danych osobowych w rozumieniu RODO – rozporządzenia
+                            Parlamentu Europejskiego i Rady (UE) 2016/679 z 27.04.2016 r. w sprawie ochrony osób
+                            fizycznych w związku z przetwarzaniem danych osobowych i w sprawie swobodnego przepływu
+                            takich danych oraz uchylenia dyrektywy 95/46/WE (ogólne rozporządzenie o ochronie danych)
+                            (Dz.Urz. UE L 119, s. 1).</p>
+                        <p>Polityka zawiera:<br>
+                            a)opis zasad ochrony danych obowiązujących w MIO;<br>
+                            b)odwołania do załączników uszczegóławiających (wzorcowe procedury lub instrukcje dotyczące
+                            poszczególnych obszarów z zakresu ochrony danych osobowych);
+                        </p>
+                        <h3 class="text-center">§2</h3>
+                        <p>Odpowiedzialny za wdrożenie i utrzymanie niniejszej Polityki jest Zarząd Spółki MIO.</p>
+                        <p>Michał Olek powierza realizację zadań związanych z wdrożeniem i utrzymaniem Polityki MIO.</p>
+                        <p>Za nadzór i monitorowanie przestrzegania Polityki odpowiada Zarząd Spółki MIO.</p>
+                        <p>Za stosowanie niniejszej Polityki odpowiedzialni są wszyscy członkowie personelu MIO.</p>
+                        <p>Zarząd Spolki MIO powinien też zapewnić zgodność postępowania kontrahentów z niniejszą
+                            Polityką w odpowiednim zakresie, gdy dochodzi do przekazania im danych osobowych przez
+                            MIO.</p>
+                        <h3 class="text-center">§3</h3>
+                        <p>Skróty i definicje:<br>
+                            a)Polityka oznacza niniejszą Politykę ochrony danych osobowych, o ile co innego nie wynika
+                            wyraźnie z kontekstu.<br>
+                            b)RODO oznacza rozporządzenie Parlamentu Europejskiego i Rady (UE) 2016/679 z &nbsp;27.04.2016
+                            r. w sprawie ochrony osób fizycznych w związku z przetwarzaniem danych osobowych i w sprawie
+                            swobodnego przepływu takich danych oraz uchylenia dyrektywy 95/46/WE (ogólne rozporządzenie
+                            o ochronie danych) (Dz.Urz. UE L 119, s. 1).<br>
+                            c)Dane oznaczają dane osobowe, o ile co innego nie wynika wyraźnie z kontekstu. <br>
+                            d)Dane wrażliwe oznaczają dane specjalne i dane karne. <br>
+                            e)Dane specjalne oznaczają dane wymienione w art. 9 ust. 1 RODO, tj. dane osobowe
+                            ujawniające pochodzenie rasowe lub etniczne, poglądy polityczne, przekonania religijne lub
+                            światopoglądowe, przynależność do związków zawodowych, dane genetyczne, biometryczne w celu
+                            jednoznacznego zidentyfikowania osoby fizycznej lub dane dotyczące zdrowia, seksualności lub
+                            orientacji seksualnej.<br>
+                            f)Dane karne oznaczają dane wymienione w art. 10 RODO, tj. dane dotyczące wyroków
+                            skazujących i naruszeń prawa.<br>
+                            g)Dane dzieci oznaczają dane osób poniżej 16. roku życia <br>
+                            h)Osoba oznacza osobę, której dane dotyczą, o ile co innego nie wynika wyraźnie z &nbsp;kontekstu.<br>
+                            i)Podmiot przetwarzający oznacza organizację lub osobę, której MIO powierzył przetwarzanie
+                            danych osobowych (np. usługodawca IT, zewnętrzna księgowość).<br>
+                            j)Eksport danych oznacza przekazanie danych do państwa trzeciego lub organizacji
+                            międzynarodowej. <br>
+                            k)IOD lub Inspektor oznacza Inspektora Ochrony Danych Osobowych. <br>
+                            l)RCPD lub Rejestr oznacza Rejestr Czynności Przetwarzania Danych Osobowych.
+                        </p>
+                        <h3 class="text-center">§4</h3>
+                        <p>Ochrona danych osobowych w MIO opiera się o następujące filary:<br>
+                            a)Legalność – MIO dba o ochronę prywatności i przetwarza dane zgodnie z &nbsp;prawem.<br>
+                            b)Bezpieczeństwo – MIO zapewnia odpowiedni poziom bezpieczeństwa danych podejmując stale
+                            działania w tym zakresie.<br>
+                            c)Prawa Jednostki – MIO umożliwia osobom, których dane przetwarza, wykonywanie swoich praw i
+                            prawa te realizuje. <br>
+                            d)Rozliczalność – MIO dokumentuje to, w jaki sposób spełnia obowiązki, aby w &nbsp;każdej
+                            chwili móc wykazać zgodność.</p>
+                        <p>Przetwarzając dane osobowe MIO kieruje się następującymi zasadami:<br>
+                            a) legalizmu – przetwarzanie w oparciu o podstawę prawną i zgodnie z prawem;<br>
+                            b)rzetelności – przetwarzanie rzetelne i uczciwie; <br>
+                            c) transparentności – przetwarzanie w sposób przejrzysty dla osoby, której dane
+                            dotyczą;<br>
+                            d) minimalizacji – przetwarzanie w konkretnych celach i nie „na zapas”; <br>
+                            e) adekwatności – przetwarzanie nie więcej niż potrzeba; <br>
+                            f) prawidłowości – przetwarzanie z dbałością o prawidłowość danych;<br>
+                            g) czasowości – przetwarzanie nie dłużej niż potrzeba; <br>
+                            h) bezpieczeństwa – przetwarzanie w sposób zapewniający odpowiednie bezpieczeństwo danych.
+                        </p>
+                        <h3 class="text-center">§5</h3>
+                        <p>System ochrony danych osobowych w MIO składa się z następujących elementów:<br>
+                            1) Inwentaryzacja danych. MIO dokonuje identyfikacji zasobów danych osobowych przez niego
+                            przetwarzanych, klas danych, zależności między zasobami danych, identyfikacji sposobów
+                            wykorzystania danych (inwentaryzacja), w tym:<br>
+                            a) przypadków przetwarzania danych specjalnych i danych „kryminalnych” (dane wrażliwe);
+                            <br>
+                            b) przypadków przetwarzania danych osób, których MIO nie identyfikuje (dane
+                            niezidentyfikowane);<br>
+                            c) przypadków przetwarzania danych dzieci; <br>
+                            d) profilowania;<br>
+                            e) współadministrowania danymi.<br>
+                            2)Rejestr. MIO opracowuje, prowadzi i utrzymuje Rejestr Czynności Danych Osobowych
+                            (Rejestr). Rejestr jest narzędziem rozliczania zgodności z ochroną danych w MIO. Wzór
+                            rejestru stanowi załącznik nr 1 do Polityki.<br>
+                            3)Podstawy prawne. MIO zapewnia, identyfikuje, weryfikuje podstawy prawne przetwarzania
+                            danych i rejestruje je w Rejestrze, w tym: <br>
+                            a) utrzymuje system zarządzania zgodami na przetwarzanie danych i komunikację na odległość,
+                            <br>
+                            b) inwentaryzuje i uszczegóławia uzasadnienie przypadków, gdy przetwarza dane na podstawie
+                            prawnie uzasadnionego interesu MIO<br>
+                            4) Obsługa praw jednostki. MIO spełnia obowiązki informacyjne względem osób, których dane
+                            przetwarza, oraz zapewnia obsługę ich praw, realizując otrzymane w tym zakresie żądania, w
+                            tym:<br>
+                            a)Obowiązki informacyjne. MIO przekazuje osobom, prawem wymagane informacje przy zbieraniu
+                            danych i w innych sytuacjach oraz organizuje i zapewnia udokumentowanie realizacji tych
+                            obowiązków. <br>
+                            b)Możliwość wykonania żądań. MIO weryfikuje i zapewnia możliwość efektywnego wykonania
+                            każdego typu żądania przez siebie i swoich przetwarzających. <br>
+                            c)Obsługa żądań. MIO zapewnia odpowiednie nakłady i procedury, aby żądania osób były
+                            realizowane w terminach i w sposób wymagany przez RODO i dokumentowane.<br>
+                            d)Zawiadamianie o naruszeniach. MIO stosuje procedury pozwalające na ustalenie konieczności
+                            zawiadomienia osób dotkniętych zidentyfikowanym naruszeniem ochrony danych.<br>
+                            5)Minimalizacja. MIO posiada zasady i metody zarządzania minimalizacją (privacy by default),
+                            a w tym: <br>
+                            a)zasady zarządzaniaadekwatnością danych; <br>
+                            b)zasady reglamentacji i zarządzania dostępem do danych;<br>
+                            c)zasady zarządzania okresem przechowywania danych i weryfikacji dalszej przydatności;<br>
+                            6)Bezpieczeństwo. MIO zapewnia odpowiedni poziom bezpieczeństwa danych, w tym: <br>
+                            a)przeprowadza analizy ryzyka dla czynności przetwarzania danych lub ich kategorii;<br>
+                            b)przeprowadza oceny skutków dla ochrony danych tam, gdzie ryzyko naruszenia praw i wolności
+                            osób jest wysokie;<br>
+                            c)dostosowuje środki ochrony danych do ustalonego ryzyka;<br>
+                            d)stosuje procedury pozwalające na identyfikację, ocenę i zgłoszenie zidentyfikowanego
+                            naruszenia ochrony danych Urzędowi Ochrony Danych − zarządza incydentami.<br>
+                            7)Przetwarzający. Administrator weryfikuje przetwarzających dane na rzecz MIO pod kątem
+                            gwarancji realizacji wymogów co do warunków przetwarzania (umowa powierzenia), a także
+                            sprawdza sposób wykonywania umów powierzenia.<br>
+                            8)Eksport danych. MIO weryfikuje, czy nie przekazuje danych do państw trzecich (czyli poza
+                            UE, Norwegię, Lichtenstein, Islandię) lub do organizacji międzynarodowych oraz zapewnienia
+                            zgodne z prawem warunki takiego przekazywania, jeśli ma ono miejsce.<br>
+                            9)Privacy by design. MIO zarządza zmianami mającymi wpływ na prywatność. W tym celu
+                            uruchamianie nowych projektów i inwestycji w MIO wywołuje konieczność oceny wpływu zmiany na
+                            ochronę danych, zapewnienie prywatności (a w tym zgodności celów przetwarzania,
+                            bezpieczeństwa danych i minimalizacji) już w fazie projektowania zmiany, inwestycji czy na
+                            początku nowego projektu.<br>
+                            MIO przeprowadza inwentaryzację danych, o których mowa w ust. 1, także w dalszej części
+                            Polityki przy użyciu odrębnych arkuszy, które znajdują się w Analizie ryzyka naruszenia praw
+                            i wolności osób. Dokument ten stanowi załącznik nr 2 do Polityki.
+                        </p>
+
+                        <h3 class="text-center">§6</h3>
+                        <p>MIO identyfikuje przypadki, w których przetwarza lub może przetwarzać dane wrażliwe (dane
+                            specjalne i dane karne) oraz zapewnia zgodność z prawem przetwarzania danych wrażliwych.</p>
+                        <p>MIO identyfikuje przypadki, w których przetwarza lub może przetwarzać dane niezidentyfikowane
+                            i zapewnia realizację praw osób, których dotyczą dane niezidentyfikowane.</p>
+                        <p>MIO identyfikuje przypadki, w których dokonuje profilowania przetwarzanych danych i zapewnia
+                            zgodność tego procesu z prawem.</p>
+                        <p>MIO identyfikuje przypadki współadministrowania danymi.</p>
+
+                        <h3 class="text-center">§7</h3>
+                        <p>Rejestr czynności przetwarzania danych osobowych stanowi formę dokumentowania czynności
+                            przetwarzania danych, pełni rolę mapy przetwarzania danych i jest jednym z &nbsp;kluczowych
+                            elementów umożliwiających realizację fundamentalnej zasady, na której opiera się cały system
+                            ochrony danych osobowych, czyli zasady rozliczalności.</p>
+                        <p>MIO prowadzi Rejestr Czynności Przetwarzania Danych, w którym inwentaryzuje i &nbsp;monitoruje
+                            sposób, w jaki wykorzystuje dane osobowe.</p>
+                        <p>Rejestr jest jednym z podstawowych narzędzi umożliwiających MIO rozliczanie większości
+                            obowiązków ochrony danych.</p>
+                        <p>W Rejestrze, dla każdej czynności przetwarzania danych, którą MIO uznała za odrębną dla
+                            potrzeb Rejestru, MIO odnotowuje co najmniej:<br>
+                            a)nazwę czynności, <br>
+                            b)cel przetwarzania, <br>
+                            c)opis kategorii osób, <br>
+                            d)opis kategorii danych, <br>
+                            e)podstawę prawną przetwarzania, wraz z wyszczególnieniem kategorii uzasadnionego interesu
+                            MIO, jeśli podstawą jest uzasadniony interes,<br>
+                            f)sposób zbierania danych, <br>
+                            g)opis kategorii odbiorców danych (w tym przetwarzających),<br>
+                            h)informację o przekazaniu poza EU/EOG; <br>
+                            i) ogólny opis technicznych i organizacyjnych środków ochrony danych.
+                        </p>
+
+                        <h3 class="text-center">§8</h3>
+                        <p>MIO dokumentuje w Rejestrze podstawy prawne przetwarzania danych dla poszczególnych czynności
+                            przetwarzania.</p>
+                        <p>Wskazując ogólną podstawę prawną (zgoda, umowa, obowiązek prawny, żywotne interesy, zadanie
+                            publiczne/władza publiczna, uzasadniony cel) MIO dookreśla podstawę w czytelny sposób, gdy
+                            jest to potrzebne. Np. dla zgody wskazując na jej zakres, gdy podstawą jest prawo –
+                            wskazując na konkretny przepis i inne dokumenty, np. umowę, porozumienie administracyjne,
+                            żywotne interesy – wskazując na kategorie zdarzeń, w których się zmaterializują, uzasadniony
+                            cel – wskazując na konkretny cel, np. marketing własny, dochodzenie roszczeń.</p>
+                        <p>MIO zarządza zgodami gromadząc je i weryfikację posiadania zgody osoby na przetwarzanie jej
+                            konkretnych danych w konkretnym celu, zgody na komunikację na odległość (email, telefon,
+                            sms, in.) oraz odmowy zgody, cofnięcia zgody i podobnych czynności (sprzeciw, ograniczenie
+                            itp.).</p>
+
+                        <h3 class="text-center">§9</h3>
+                        <p>MIO dba o czytelność i styl przekazywanych informacji i komunikacji z osobami, których dane
+                            przetwarza.</p>
+                        <p>MIO ułatwia osobom korzystanie z ich praw.</p>
+                        <p>MIO dba o dotrzymywanie prawnych terminów realizacji obowiązków względem osób.</p>
+                        <p>MIO wprowadza adekwatne metody identyfikacji i uwierzytelniania osób dla potrzeb realizacji
+                            praw jednostki i obowiązków informacyjnych.</p>
+                        <p>W celu realizacji praw jednostki MIO zapewnia możliwość działań pozwalających zidentyfikować
+                            dane konkretnych osób przetwarzane przez MIO, zintegrować te dane, wprowadzać do nich zmiany
+                            i usuwać w sposób zintegrowany.</p>
+                        <p>MIO dokumentuje obsługę obowiązków informacyjnych, zawiadomień i żądań osób.</p>
+                        <p>Wzór klauzuli informacyjnej w przypadku pozyskiwania danych osobowych w sposób inny niż od
+                            osoby, której dane dotyczą stanowi załącznik nr 3 do Polityki.</p>
+                        <p>Wzór klauzuli informacyjnej w przypadku zbierania danych od osoby, której dane dotyczą –
+                            stanowi załącznik nr 4 do Polityki.</p>
+                        <p>Wzór zgody na przetwarzanie danych osobowych stanowi załącznik nr 5 do Polityki.</p>
+
+                        <h3 class="text-center">§10</h3>
+                        <p>MIO określa zgodne z prawem i efektywne sposoby wykonywania obowiązków informacyjnych.</p>
+                        <p>MIO informuje osobę o przedłużeniu ponad jeden miesiąc terminu na rozpatrzenie żądania tej
+                            osoby.</p>
+                        <p>MIO informuje osobę o przetwarzaniu jej danych, przy pozyskiwaniu danych od tej osoby.</p>
+                        <p>MIO informuje osobę o przetwarzaniu jej danych, przy pozyskiwaniu danych o tej osobie
+                            niebezpośrednio od niej.</p>
+                        <p>MIO określa – jeśli go to dotyczy – sposób informowania osób o przetwarzaniu danych
+                            niezidentyfikowanych, tam gdzie to jest możliwe (np. tabliczka o objęciu obszaru
+                            monitoringiem wizyjnym).</p>
+                        <p>MIO informuje osobę o planowanej zmianie celu przetwarzania danych.</p>
+                        <p>MIO informuje osobę przed uchyleniem ograniczenia przetwarzania.</p>
+                        <p>MIO informuje odbiorców danych o sprostowaniu, usunięciu lub ograniczeniu przetwarzania
+                            danych (chyba że będzie to wymagało niewspółmiernie dużego wysiłku lub będzie
+                            niemożliwe).</p>
+                        <p>MIO informuje osobę o prawie sprzeciwu względem przetwarzania danych najpóźniej przy
+                            pierwszym kontakcie z tą osobą.</p>
+                        <p>MIO bez zbędnej zwłoki zawiadamia osobę o naruszeniu ochrony danych osobowych, jeżeli może
+                            ono powodować wysokie ryzyko naruszenia praw lub wolności tej osoby.</p>
+
+                        <h3 class="text-center">§11</h3>
+                        <p>Realizując prawa osób, których dane dotyczą, MIO zapewnia gwarancje ochrony praw i wolności
+                            osób trzecich. W szczególności w przypadku powzięcia wiarygodnej wiadomości o tym, że
+                            wykonanie żądania osoby o wydanie kopii danych lub prawa do przeniesienia danych może
+                            niekorzystnie wpłynąć na prawa i wolności innych osób (np. prawa związane z ochroną danych
+                            innych osób, prawa własności intelektualnej, tajemnicę handlową, dobra osobiste itp.), MIO
+                            może zwrócić się do osoby w celu wyjaśnienia wątpliwości lub podjąć inne prawem dozwolone
+                            kroki, łącznie z odmową zadośćuczynienia żądaniu.</p>
+                        <p>MIO informuje osobę o tym, że nie przetwarza danych jej dotyczących, jeśli taka osoba
+                            zgłosiła żądanie dotyczące jej praw.</p>
+                        <p>MIO informuje osobę, w ciągu miesiąca od otrzymania żądania, o odmowie rozpatrzenia żądania i
+                            o prawach osoby z tym związanych.</p>
+                        <p>Na żądanie osoby dotyczące dostępu do jej danych, MIO informuje osobę, czy przetwarza jej
+                            dane oraz informuje osobę o szczegółach przetwarzania, zgodnie z art. 15 RODO (zakres
+                            odpowiada obowiązkowi informacyjnemu przy zbieraniu danych), a także udziela osobie dostępu
+                            do danych jej dotyczących. Dostęp do danych może być zrealizowany przez wydanie kopii
+                            danych, z zastrzeżeniem, że kopii danych wydanej w wykonaniu prawa dostępu do danych MIO nie
+                            uzna za pierwszą nieodpłatną kopię danych dla potrzeb opłat za kopie danych.</p>
+                        <p>Na żądanie MIO wydaje osobie kopię danych jej dotyczących i odnotowuje fakt wydania pierwszej
+                            kopii danych. MIO może wprowadzić i utrzymywać cennik kopii danych, zgodnie z którym będzie
+                            pobierał opłaty za kolejne kopie danych. Cena kopii danych skalkulowana będzie w oparciu o
+                            oszacowany jednostkowy koszt obsługi żądania wydania kopii danych. </p>
+                        <p>MIO dokonuje sprostowania nieprawidłowych danych na żądanie osoby. MIO ma prawo odmówić
+                            sprostowania danych, chyba że osoba w rozsądny sposób wykaże nieprawidłowości danych,
+                            których sprostowania się domaga. W przypadku sprostowania danych MIO informuje osobę o
+                            odbiorcach danych, na żądanie tej osoby. </p>
+                        <p>MIO uzupełnia i aktualizuje dane na żądanie osoby. MIO ma prawo odmówić uzupełnienia danych,
+                            jeżeli uzupełnienie byłoby niezgodne z celami przetwarzania danych (np. MIO nie musi
+                            przetwarzać danych, które są mu zbędne) MIO może polegać na oświadczeniu osoby, co do
+                            uzupełnianych danych, chyba że będzie to niewystarczające w &nbsp;świetle przyjętych
+                            procedur (np. co do pozyskiwania takich danych), prawa lub zaistnieją podstawy, aby uznać
+                            oświadczenie za niewiarygodne.</p>
+                        <p>Na żądanie osoby, MIO usuwa dane, gdy:<br>
+                            a)dane nie są niezbędne do celów, w których zostały zebrane ani przetwarzane w &nbsp;innych
+                            celach,<br>
+                            b)zgoda na ich przetwarzanie została cofnięta, a nie ma innej podstawy prawnej
+                            przetwarzania,<br>
+                            c)osoba wniosła skuteczny sprzeciw względem przetwarzania tych danych,<br>
+                            d)dane były przetwarzane niezgodnie z prawem,<br>
+                            e)konieczność usunięcia wynika z obowiązku prawnego,<br>
+                            f)żądanie dotyczy danych dziecka zebranych na podstawie zgody w celu świadczenia usług
+                            społeczeństwa informacyjnego oferowanych bezpośrednio dziecku (np. profil dziecka na portalu
+                            społecznościowym, udział w konkursie na stronie internetowej).
+                        </p>
+
+                        <p>MIO zapewnia efektywną realizację prawa do usunięcia danych przy poszanowaniu wszystkich
+                            zasad ochrony danych, w tym bezpieczeństwa, a także weryfikację, czy nie zachodzą wyjątki, o
+                            których mowa w art. 17. ust. 3 RODO.</p>
+                        <p>Jeżeli dane podlegające usunięciu zostały upublicznione przez MIO, podejmuje on rozsądne
+                            działania, w tym środki techniczne, by poinformować innych administratorów przetwarzających
+                            te dane osobowe, o potrzebie usunięcia danych i dostępu do nich.</p>
+                        <p>W przypadku usunięcia danych MIO informuje osobę o odbiorcach danych, na żądanie tej
+                            osoby.</p>
+                        <p>MIO dokonuje ograniczenia przetwarzania danych na żądanie osoby, gdy:
+                            a)osoba kwestionuje prawidłowość danych – na okres pozwalający sprawdzić ich
+                            prawidłowość,<br>
+                            b)przetwarzanie jest niezgodne z prawem, a osoba, której dane dotyczą, sprzeciwia się
+                            usunięciu danych osobowych, żądając w zamian ograniczenia ich wykorzystywania,<br>
+                            c)MIO nie potrzebuje już danych osobowych, ale są one potrzebne osobie, której dane dotyczą,
+                            do ustalenia, dochodzenia lub obrony roszczeń, <br>
+                            d)osoba wniosła sprzeciw względem przetwarzania z przyczyn związanych z jej szczególną
+                            sytuacją – do czasu stwierdzenia, czy po stronie MIO zachodzą prawnie uzasadnione podstawy
+                            nadrzędne wobec podstaw sprzeciwu.
+                        </p>
+                        <p>W trakcie ograniczenia przetwarzania MIO przechowuje dane, natomiast nie przetwarza ich (nie
+                            wykorzystuje, nie przekazuje), bez zgody osoby, której dane dotyczą, chyba że w celu
+                            ustalenia, dochodzenia lub obrony roszczeń, lub w celu ochrony praw innej osoby fizycznej
+                            lub prawnej, lub z uwagi na ważne względy interesu publicznego.</p>
+                        <p>MIO informuje osobę przed uchyleniem ograniczenia przetwarzania. W przypadku ograniczenia
+                            przetwarzania danych MIO informuje osobę o odbiorcach danych, na żądanie tej osoby.</p>
+                        <p>Na żądanie osoby MIO wydaje w ustrukturyzowanym, powszechnie używanym formacie nadającym się
+                            do odczytu maszynowego lub przekazuje innemu podmiotowi,jeśli jest to możliwe, dane
+                            dotyczące tej osoby, które dostarczyła ona MIO, przetwarzane na podstawie zgody tej osoby
+                            lub w celu zawarcia lub wykonania umowy z nią zawartej, w systemach informatycznych MIO.</p>
+                        <p>Jeżeli osoba zgłosi umotywowany jej szczególną sytuacją sprzeciw względem przetwarzania jej
+                            danych, a dane przetwarzane są przez MIO w oparciu o jego uzasadniony interes lub o
+                            powierzone MIO zadanie w interesie publicznym, uwzględni on sprzeciw, o ile nie zachodzą po
+                            stronie MIO ważne prawnie uzasadnione podstawy do przetwarzania, nadrzędne wobec interesów,
+                            praw i wolności osoby zgłaszającej sprzeciw, lub podstawy do ustalenia, dochodzenia lub
+                            obrony roszczeń.</p>
+                        <p>Jeżeli MIO prowadzi badania naukowe, historyczne lub przetwarza dane w celach statystycznych,
+                            osoba może wnieść umotywowany jej szczególną sytuacją sprzeciw względem takiego
+                            przetwarzania. MIO uwzględni taki sprzeciw, chyba że przetwarzanie jest niezbędne do
+                            wykonania zadania realizowanego w interesie publicznym.</p>
+                        <p>Jeżeli osoba zgłosi sprzeciw względem przetwarzania jej danych przez MIO na potrzeby
+                            marketingu bezpośredniego (w tym ewentualnie profilowania), MIO uwzględni sprzeciw i
+                            zaprzestanie takiego przetwarzania.</p>
+
+                        <h3 class="text-center">§12</h3>
+                        <p>MIO dba o minimalizację przetwarzania danych pod kątem:<br>
+                            a) adekwatności danych do celów (ilości danych i zakresu przetwarzania),<br>
+                            b) dostępu do danych, <br>
+                            c) czasu przechowywania danych.
+                        </p>
+                        <p>MIO dokonuje okresowego przeglądu ilości przetwarzanych danych i zakresu ich przetwarzania
+                            nie rzadziej niż raz na rok.</p>
+                        <p>MIO przeprowadza weryfikację zmian co do ilości i zakresu przetwarzania danych w ramach
+                            procedur zarządzania zmianą (privacyby design).</p>
+                        <p>MIO stosuje ograniczenia dostępu do danych osobowych:<br>
+                            a) prawne (zobowiązania do poufności, zakresy upoważnień), <br>
+                            b) fizyczne (strefy dostępu, zamykanie pomieszczeń)<br>
+                            c) logiczne (ograniczenia uprawnień do systemów przetwarzających dane osobowe i zasobów
+                            sieciowych, w których rezydują dane osobowe).
+                        </p>
+                        <p>Wzór upoważnienia i zobowiązania do zachowania poufności stanowi załącznik nr 6 do
+                            Polityki.</p>
+                        <p>MIO stosuje kontrolę dostępu fizycznego do swoich pomieszczeń. </p>
+                        <p>MIO dokonuje aktualizacji uprawnień dostępowych przy zmianach w składzie personelu i zmianach
+                            ról osób, oraz zmianach podmiotów przetwarzających.</p>
+                        <p>MIO dokonuje okresowego przeglądu ustanowionych użytkowników systemów i aktualizuje ich nie
+                            rzadziej niż raz na rok. </p>
+                        <p>MIO zapewnią kontrolę cyklu życia danych osobowych w firmie, w tym weryfikacji dalszej
+                            przydatności danych względem terminów i punktów kontrolnych wskazanych w Rejestrze. Dane,
+                            których zakres przydatności ulega ograniczeniu wraz z upływem czasu są usuwane z systemów
+                            MIO, jak też z akt podręcznych i głównych. Dane takie mogą być archiwizowane oraz znajdować
+                            się na kopiach zapasowych systemów i informacji przetwarzanych przez MIO. Procedury
+                            archiwizacji i korzystania z archiwów, tworzenia i wykorzystania kopii zapasowych
+                            uwzględniają wymagania kontroli nad cyklem życia danych, a w tym wymogi usuwania danych.</p>
+
+                        <h3 class="text-center">§13</h3>
+                        <p>MIO zapewnia stopień bezpieczeństwa odpowiadający ryzyku naruszenia praw i &nbsp;wolności
+                            osób fizycznych wskutek przetwarzania danych osobowych przez MIO.</p>
+                        <p>MIO przeprowadza i dokumentuje analizy adekwatności środków bezpieczeństwa danych osobowych.
+                            W tym celu:<br>
+                            a)zapewnia odpowiedni stan wiedzy o bezpieczeństwie informacji,cyberbezpieczeństwie i
+                            ciągłości działania − wewnętrznie lub ze wsparciem podmiotów wyspecjalizowanych.<br>
+                            b)kategoryzuje dane oraz czynności przetwarzania pod kątem ryzyka, które przedstawiają.<br>
+                            c)przeprowadza analizy ryzyka naruszenia praw lub wolności osób fizycznych dla czynności
+                            przetwarzania danych lub ich kategorii, analizuje możliwe sytuacje i &nbsp;scenariusze
+                            naruszenia ochrony danych osobowych uwzględniając charakter, zakres, kontekst i cele
+                            przetwarzania, ryzyko naruszenia praw lub wolności osób fizycznych o &nbsp;różnym
+                            prawdopodobieństwie wystąpienia i wadze zagrożenia.<br>
+                            d)ustala możliwe do zastosowania organizacyjne i techniczne środki bezpieczeństwa i ocenia
+                            koszt ich wdrażania, w tym ustala przydatność i stosuje takie środki i podejście jakie uzna
+                            za celowe.
+                        </p>
+                        <p>MIO dokonuje oceny skutków planowanych operacji przetwarzania dla ochrony danych osobowych
+                            tam, gdzie zgodnie z analizą ryzyka ryzyko naruszenia praw i wolności osób jest wysokie.</p>
+                        <p>MIO stosuje metodykę oceny skutków, która zostanie przyjęta, gdy zgodnie z analizą ryzyka
+                            naruszenie praw i wolności będzie wysokie. </p>
+                        <p>MIO stosuje środki bezpieczeństwa ustalone w ramach analiz ryzyka i adekwatności środków
+                            bezpieczeństwa oraz ocen skutków dla ochrony danych. Środki bezpieczeństwa danych osobowych
+                            stanowią element środków bezpieczeństwa informacji i zapewnieniacyberbezpieczeństwa w MIO i
+                            są bliżej opisane w procedurach przyjętych przez MIO dla tych obszarów.</p>
+                        <p>MIO stosuje procedury pozwalające na identyfikację, ocenę i zgłoszenie zidentyfikowanego
+                            naruszenia ochrony danych Urzędowi Ochrony Danych w terminie 72 godzin od ustalenia
+                            naruszenia.</p>
+
+                        <h3 class="text-center">§14</h3>
+                        <p>MIO zobowiązany jest do takiego doboru kontrahentów, aby przetwarzający dawali wystarczające
+                            gwarancje wdrożenia odpowiednich środków organizacyjnych i technicznych dla zapewnienia
+                            bezpieczeństwa, realizacji praw jednostki i innych obowiązków ochrony danych spoczywających
+                            na MIO.</p>
+                        <p>MIO przyjął minimalne wymagania co do umowy powierzenia przetwarzania danych stanowiące
+                            załącznik nr 7 do Polityki Wzór umowy powierzenia przetwarzania danych.</p>
+                        <p>MIO rozlicza przetwarzających z wykorzystania podprzetwarzających, jak też z innych wymagań
+                            wynikających z Zasad powierzenia danych osobowych.</p>
+
+                        <h3 class="text-center">§15</h3>
+                        <p>MIO zapewnia rejestrację ewentualnych przypadków eksportu danych, czyli przekazywania danych
+                            poza Europejski Obszar Gospodarczy (EOG w 2017 r. = Unia Europejska, Islandia, Lichtenstein
+                            i Norwegia).</p>
+                        <p>Aby uniknąć sytuacji nieautoryzowanego eksportu danych w szczególności w związku z
+                            wykorzystaniem publicznie dostępnych usług chmurowych (shadowIT),MIO okresowo weryfikuje
+                            zachowania użytkowników oraz w miarę możliwości udostępnia zgodne z prawem ochrony danych
+                            rozwiązania równoważne.§ 16</p>
+                        <p>MIO zarządza zmianą mającą wpływ na prywatność w taki sposób, aby umożliwić zapewnienie
+                            odpowiedniego bezpieczeństwa danych osobowych oraz minimalizacji ich przetwarzania.</p>
+                        <p>W tym celu zasady prowadzenia projektów i inwestycji przez MIO odwołują się do zasad
+                            bezpieczeństwa danych osobowych i minimalizacji, wymagając oceny wpływu na prywatność i
+                            ochronę danych, uwzględnienia i zaprojektowana bezpieczeństwa i &nbsp;minimalizacji
+                            przetwarzania danych od początku projektu lub inwestycji.</p>
+
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section class="hero text-center py-5">
+            „Dobrzy ludzie, dobre jedzenie, dobry czas“
+        </section>
+    </div>
+
+
+
+
+        <!-- Stopka -->
+    {% include 'footer.html' %}
+
+    <!-- jQuery, Popper.js, and Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <!-- Owl Carousel JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
+    <!-- Owl Carousel Initialization -->
+</body>
+</html>

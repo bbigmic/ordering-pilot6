@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strona Główna - PAPU Kitchen</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <!-- Owl Carousel CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/cards/wydarzenia.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+</head>
+<body>
+
+    <!-- Navbar -->
+    {% include 'navbar.html' %}
+
+
+
+
+
+    {% block content %}
+
+
+    <section class="events-section">
+        {% for event in events %}
+            <div class="event" style="background-image: url('{{ url_for('uploaded_file', filename=event.image) }}');">
+                <h2>{{ event.title }}</h2>
+                <p>{{ event.description }}</p>
+<!--                 <p><strong>Data rozpoczęcia:</strong> {{ event.start_date.strftime('%Y-%m-%d') }}</p>
+                <p><strong>Data zakończenia:</strong> {{ event.end_date.strftime('%Y-%m-%d') }}</p> -->
+
+            </div>
+        {% endfor %}
+    </section>
+    {% endblock %}
+
+
+
+
+        <!-- Stopka -->
+    {% include 'footer.html' %}
+
+    <!-- jQuery, Popper.js, and Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <!-- Owl Carousel JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
+    <!-- Owl Carousel Initialization -->
+    <script>
+        $(document).ready(function(){
+            $(".main-slider").owlCarousel({
+                loop: true,
+                items: 1,
+                autoplay: true,
+                autoplayTimeout: 5000,
+                nav: true
+            });
+
+            $(".category-slider").owlCarousel({
+                loop: true,
+                margin: 10,
+                nav: true,
+                responsive: {
+                    0: { items: 1 },
+                    600: { items: 3 },
+                    1000: { items: 5 }
+                }
+            });
+        });
+    </script>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const carousel = document.querySelector('.main-slider');
+            const container = document.getElementById('carousel-container');
+
+            // Update container background on slide change
+            $('.main-slider').on('changed.owl.carousel', function(event) {
+                const currentSlide = $(event.target).find('.owl-item.active .item');
+                const newBackground = currentSlide.data('background');
+                if (newBackground) {
+                    container.style.backgroundImage = `url('${newBackground}')`;
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,181 @@
+{% extends "base.html" %}
+
+{% block title %}Status Zamówienia{% endblock %}
+
+{% block content %}
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+<div class="status-container">
+    <h2> Przyjęliśmy Twoje zamówienie </h2>
+
+    <div class="action-buttons">
+        <button onclick="callWaiter({{ order.id }})" class="btn">Zawołaj kelnera</button>
+    </div>
+
+    <div class="bill-request">
+        <button onclick="showPaymentOptions()" class="btn">Poproś rachunek</button>
+    </div>
+
+ <!-- Sekcja wyboru płatności i innych opcji -->
+    <div id="payment-section" style="display: none;">
+        <h3>Wybierz metodę płatności</h3>
+        <select id="payment-method">
+            <option value="Karta">Karta</option>
+            <option value="Gotówka">Gotówka</option>
+            <option value="BLIK">BLIK</option>
+        </select>
+
+        <h3>Potrzebujesz faktury?</h3>
+        <label>
+            <input type="checkbox" id="invoice-checkbox" onchange="toggleInvoiceField()"> Tak
+        </label>
+        <div id="invoice-field" style="display: none; margin-top: 10px;">
+            <label for="nip-input">Wprowadź NIP:</label>
+            <input type="text" id="nip-input" placeholder="Np. 1234567890">
+        </div>
+
+        <h3>Wybierz napiwek</h3>
+        <div>
+            <label><input type="radio" name="tip" value="0" checked> 0 PLN</label>
+            <label><input type="radio" name="tip" value="5"> 5 PLN</label>
+            <label><input type="radio" name="tip" value="15"> 15 PLN</label>
+            <label><input type="radio" name="tip" value="custom" onchange="toggleCustomTip()"> Inna kwota</label>
+        </div>
+        <div id="custom-tip-field" style="display: none; margin-top: 10px;">
+            <label for="custom-tip-input">Kwota napiwku:</label>
+            <input type="number" id="custom-tip-input" placeholder="Wpisz kwotę" min="0">
+        </div>
+
+        <button onclick="confirmPayment({{ order.id }})" class="btn">Potwierdź</button>
+    </div>
+
+    <h1 style="margin-top:20px;"> Status zamówienia</h1>
+    <h4> W trakcie przygotowania. </h4>
+    <h4>Numer zamówienia: <h1>{{ order.order_number }}</h1> </h4>
+    <h4>Do stolika numer {{ order.table_id }}</h4>
+    {% if remaining_seconds is not none %}
+        <p id="timer" class="timer">
+            Przybliżony czas realizacji: <span id="time-remaining">{{ remaining_seconds }}</span>
+        </p>
+        <div id="spinner" class="spinner"></div>
+    {% else %}
+        <p>Status zamówienia: <b>{{ order.status }}</b></p>
+    {% endif %}
+
+    <h3>Szczegóły zamówienia:</h3>
+    <ul>
+        {% for item in order.order_items %}
+            <li>
+                {{ item.menu_item.name }} - Cena: {{ item.menu_item.price }} PLN - Ilość: {{ item.quantity }} 
+                {% if item.takeaway %}
+                    <br>[Na wynos] + 2.35 PLN
+                {% endif %}
+                {% if item.customization %}
+                    <br><em>Personalizacja: {{ item.customization }}</em>
+                {% endif %}
+                <hr>
+            </li>
+        {% endfor %}
+    </ul>
+    
+    <p>Łączna cena: <b> {{ "%.2f"|format(order.total_price) }} PLN </b></p>
+
+    <h2> Życzymy smaczego! </h2>
+
+    <div class="review-section" style="margin-top: 20px; text-align: center;">
+        <a href="https://search.google.com/local/writereview?placeid=ChIJr5OQYn23EEcRUzQ80140sZo" 
+           target="_blank" 
+           class="btn review-btn">
+           Dodaj opinię o restauracji
+           <i class="fab fa-google" style="margin-left: 10px;"></i>
+        </a>
+    </div>
+
+</div>
+
+<script>
+    let remainingTime = {{ remaining_seconds or 0 }};
+    const timerDisplay = document.getElementById("time-remaining");
+    const spinner = document.getElementById("spinner");
+
+    function updateTimer() {
+        if (remainingTime <= 0) {
+            timerDisplay.innerText = "Zamówienie gotowe!";
+            spinner.style.display = 'none';
+        } else {
+            const minutes = Math.floor(remainingTime / 60);
+            const seconds = remainingTime % 60;
+            timerDisplay.innerText = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            remainingTime--;
+            setTimeout(updateTimer, 1000);
+        }
+    }
+
+    if (remainingTime > 0) {
+        updateTimer();
+    }
+
+
+    // Funkcja wezwania kelnera
+    function callWaiter(orderId) {
+        fetch(`/call_waiter/${orderId}`, {
+            method: 'POST'
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === "success") {
+                alert("Kelner został powiadomiony.");
+            } else if (data.status === "error") {
+                alert(data.message); // Wyświetlenie komunikatu o ograniczeniu czasowym
+            }
+        });
+    }
+
+    // function showPaymentOptions() {
+    //     // Odsłaniamy sekcję z wyborem metody płatności
+    //     const paymentOptions = document.getElementById("payment-options");
+    //     paymentOptions.style.display = 'block';
+        
+    //     // Przewijamy stronę do sekcji płatności
+    //     // paymentOptions.scrollIntoView({ behavior: "smooth" });
+    // }
+
+    function showPaymentOptions() {
+        document.getElementById("payment-section").style.display = "block";
+    }
+
+    function toggleInvoiceField() {
+        const invoiceField = document.getElementById("invoice-field");
+        invoiceField.style.display = document.getElementById("invoice-checkbox").checked ? "block" : "none";
+    }
+
+    function toggleCustomTip() {
+        const customTipField = document.getElementById("custom-tip-field");
+        customTipField.style.display = document.querySelector('input[name="tip"]:checked').value === "custom" ? "block" : "none";
+    }
+
+    function confirmPayment(orderId) {
+        const paymentMethod = document.getElementById("payment-method").value;
+        const invoiceRequired = document.getElementById("invoice-checkbox").checked;
+        const nip = invoiceRequired ? document.getElementById("nip-input").value : null;
+        let tip = document.querySelector('input[name="tip"]:checked').value;
+
+        if (tip === "custom") {
+            tip = document.getElementById("custom-tip-input").value || 0;
+        }
+
+        fetch(`/request_bill/${orderId}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ payment_method: paymentMethod, invoice_required: invoiceRequired, nip: nip, tip: parseFloat(tip) })
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert("Rachunek został zażądany.");
+            document.getElementById("payment-section").style.display = "none";
+        })
+        .catch(error => console.error("Błąd przy żądaniu rachunku:", error));
+    }
+
+</script>
+{% endblock %}

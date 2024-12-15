@@ -1,0 +1,151 @@
+{% extends "base.html" %}
+
+{% block title %}Menu{% endblock %}
+
+{% block content %}
+
+<h2 style="width:70%;">Składasz <br>zamówienie <br>do stolika nr {{ table_id }}</h2>
+
+<!-- Przycisk do rozwijania koszyka -->
+<button onclick="toggleCart()" id="cart-toggle-btn">
+    Pokaż Koszyk
+    <span id="cart-total-price" style="display: block; left: 20px;">0 PLN 🛒</span>
+</button>
+
+<h1>Menu</h1>
+
+<!-- Wyświetlanie Lunchu Dnia tylko jeśli display_date to dzisiejsza data -->
+{% if 'Lunch Dnia' in categories %}
+    {% set today = current_time.date() %}
+    {% set lunch_items = categories['Lunch Dnia'] | selectattr('display_date', 'equalto', today) | list %}
+    {% if lunch_items %}
+        <button class="accordion" onclick="toggleCategory(this)">
+            Lunch Dnia
+            <span class="arrow">&#9654;</span>
+        </button>
+        <div class="panel" style="display: none;">
+            {% for item in lunch_items %}
+                <div class="menu-item">
+                    {% if item.image_filename %}
+                        <img src="{{ url_for('uploaded_file', filename=item.image_filename) }}" alt="{{ item.name }}" class="menu-item-image">
+                    {% endif %}
+                    <h3>{{ item.name }}</h3>
+                    <p>{{ item.description }}</p>
+                    <p>Cena: {{ item.price }} PLN</p>
+                    {% if item.contains_alcohol %}
+                        <p class="warning">* Zawiera alkohol</p>
+                        <label for="age-confirm-{{ item.id }}">Oświadczam, że mam 18 lat:</label>
+                        <input type="checkbox" id="age-confirm-{{ item.id }}">
+                    {% endif %}
+                    {% if item.customizable %}
+                        <label>Uwagi do zamówienia:</label>
+                        <input type="text" id="customization-{{ item.id }}" placeholder='(opcjonalnie) np. "bez sosu"'>
+                    {% endif %}
+                    <label>
+                        <input type="checkbox" id="takeaway-{{ item.id }}"> Na wynos (+2.35 PLN)
+                    </label>
+                    <button id="add-to-cart-{{ item.id }}" onclick="addToCart({{ item.id }}, '{{ item.name }}', {{ item.price }}, {{ 'true' if item.contains_alcohol else 'false' }})">Dodaj</button>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endif %}
+
+<!-- Wyświetlanie Deseru Dnia tylko jeśli display_date to dzisiejsza data -->
+{% if 'Deser Dnia' in categories %}
+    {% set dessert_items = categories['Deser Dnia'] | selectattr('display_date', 'equalto', today) | list %}
+    {% if dessert_items %}
+        <button class="accordion" onclick="toggleCategory(this)">
+            Deser Dnia
+            <span class="arrow">&#9654;</span>
+        </button>
+        <div class="panel" style="display: none;">
+            {% for item in dessert_items %}
+                <div class="menu-item">
+                    {% if item.image_filename %}
+                        <img src="{{ url_for('uploaded_file', filename=item.image_filename) }}" alt="{{ item.name }}" class="menu-item-image">
+                    {% endif %}
+                    <h3>{{ item.name }}</h3>
+                    <p>{{ item.description }}</p>
+                    <p>Cena: {{ item.price }} PLN</p>
+                    {% if item.contains_alcohol %}
+                        <p class="warning">* Zawiera alkohol</p>
+                        <label for="age-confirm-{{ item.id }}">Oświadczam, że mam 18 lat:</label>
+                        <input type="checkbox" id="age-confirm-{{ item.id }}">
+                    {% endif %}
+                    {% if item.customizable %}
+                        <label>Uwagi do zamówienia:</label>
+                        <input type="text" id="customization-{{ item.id }}" placeholder='(opcjonalnie) np. "bez sosu"'>
+                    {% endif %}
+                    <label>
+                        <input type="checkbox" id="takeaway-{{ item.id }}"> Na wynos (+2.35 PLN)
+                    </label>
+                    <button id="add-to-cart-{{ item.id }}" onclick="addToCart({{ item.id }}, '{{ item.name }}', {{ item.price }}, {{ 'true' if item.contains_alcohol else 'false' }})">Dodaj</button>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endif %}
+
+<!-- Wyświetlanie pozostałych kategorii -->
+{% for category, items in categories.items() %}
+    {% if category not in ['Lunch Dnia', 'Deser Dnia'] %}
+        {% set available_items = items | selectattr('available', 'equalto', True) | list %}
+        {% if available_items %}
+            <button class="accordion" onclick="toggleCategory(this)">
+                {{ category }}
+                <span class="arrow">&#9654;</span>
+            </button>
+            <div class="panel" style="display: none;">
+                {% for item in available_items %}
+                    <div class="menu-item">
+                        {% if item.image_filename %}
+                            <img src="{{ url_for('uploaded_file', filename=item.image_filename) }}" alt="{{ item.name }}" class="menu-item-image">
+                        {% endif %}
+                        <h3>{{ item.name }}</h3>
+                        <p>{{ item.description }}</p>
+                        <p>Cena: {{ item.price }} PLN</p>
+                        {% if item.contains_alcohol %}
+                            <p class="warning">* Zawiera alkohol</p>
+                            <label for="age-confirm-{{ item.id }}">Oświadczam, że mam 18 lat:</label>
+                            <input type="checkbox" id="age-confirm-{{ item.id }}">
+                        {% endif %}
+                        {% if item.customizable %}
+                            <label>Uwagi do zamówienia:</label>
+                            <input type="text" id="customization-{{ item.id }}" placeholder='(opcjonalnie) np. "bez sosu"'>
+                        {% endif %}
+                        <label>
+                            <input type="checkbox" id="takeaway-{{ item.id }}"> Na wynos (+2.35 PLN)
+                        </label>
+                        <button id="add-to-cart-{{ item.id }}" onclick="addToCart({{ item.id }}, '{{ item.name }}', {{ item.price }}, {{ 'true' if item.contains_alcohol else 'false' }})">Dodaj</button>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endif %}
+{% endfor %}
+
+<!-- Koszyk -->
+<div id="cart" class="cart">
+    <div class="cart-header">
+        <h3>Twój Koszyk</h3>
+    </div>
+    <ul id="cart-items"></ul>
+    <div class="cart-footer">
+        <p>Suma: <span id="cart-total">0</span> PLN</p>
+        <button onclick="submitOrder()">Zamów</button>
+    </div>
+</div>
+
+<script src="/static/script.js"></script>
+
+<script>
+    // Funkcja do rozwijania i zwijania kategorii
+    function toggleCategory(button) {
+        button.classList.toggle("active");
+        const panel = button.nextElementSibling;
+        panel.style.display = panel.style.display === "none" ? "block" : "none";
+    }
+</script>
+
+{% endblock %}
