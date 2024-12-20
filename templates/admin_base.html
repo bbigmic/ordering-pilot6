@@ -13,13 +13,27 @@
         <!-- Sidebar -->
         <nav class="sidebar">
             <button class="toggle-sidebar" onclick="toggleSidebar()">&#9776;</button>
-            <h2>Panel Administratora</h2><hr>
-            <ul>
-                <li class="sidebar-item"><a href="{{ url_for('admin_panel') }}">Aktualne Menu</a></li>
-                <li class="sidebar-item"><a href="{{ url_for('add_tables') }}">Stoliki</a></li>
-                <li class="sidebar-item"><a href="{{ url_for('add_events') }}">Wydarzenia</a></li>
-                <li class="sidebar-item"><a href="{{ url_for('admin_add_popup') }}">Pop-up</a></li>
-            </ul>
+            <div class="uls">
+                <h2>Panel Administratora</h2><hr>
+
+                <div class="only-worker-ul">
+                    <ul>
+                        <li class="sidebar-item"><a href="{{ url_for('waiter_view') }}">Widok Kelnera</a></li>
+                        <li class="sidebar-item"><a href="{{ url_for('kitchen_view') }}">Widok Kuchni</a></li>
+                        <li class="sidebar-item"><a href="http://ordering-deploy.onrender.com/menu/1">Zamawianie</a></li>
+                        <!-- <li class="sidebar-item"><a href="">Rezerwacje stolików</a></li>                 -->
+                    </ul>
+                </div>
+                <hr>
+                <div class="admin-ul">
+                    <ul>
+                        <li class="sidebar-item"><a href="{{ url_for('admin_panel') }}">Aktualne Menu</a></li>
+                        <li class="sidebar-item"><a href="{{ url_for('add_tables') }}">Stoliki</a></li>
+                        <li class="sidebar-item"><a href="{{ url_for('add_events') }}">Wydarzenia</a></li>
+                        <li class="sidebar-item"><a href="{{ url_for('admin_add_popup') }}">Pop-up</a></li>
+                    </ul>
+                </div>
+            </div>
         </nav>
         <!-- Main Content Area -->
         <div class="main-content">
@@ -32,5 +46,16 @@
         const sidebar = document.querySelector('.sidebar');
         sidebar.classList.toggle('collapsed');
     }
+
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const sidebarItems = document.querySelectorAll('.sidebar-item a');
+
+        sidebarItems.forEach(item => {
+            if (item.href === window.location.href) {
+                item.parentElement.classList.add('active');
+            }
+        });
+    });
 </script>
 </html>

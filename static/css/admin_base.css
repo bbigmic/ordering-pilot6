@@ -10,6 +10,14 @@ body {
     min-height: 100vh;
 }
 
+.only-worker-ul {
+    padding-bottom: 50px;
+}
+
+.only-worker-ul {
+    padding-bottom: 50px;
+}
+
 .sidebar-item {
     border: 1px solid #444; /* Kolor i styl obramowania */
 
@@ -44,6 +52,13 @@ body {
         border: 1px solid #ddd; /* Kolor i styl obramowania */
 
 }
+
+.sidebar-item.active {
+    border: 2px solid #ddd; /* Jasne niebieskie obramowanie */
+    background-color: #333;    /* Opcjonalnie ciemniejsze tło */
+}
+
+
 .sidebar {
     width: 250px;
     background-color: #333;
