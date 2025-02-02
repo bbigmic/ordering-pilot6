@@ -108,6 +108,8 @@ class Event(db.Model):
     start_date = db.Column(db.Date, nullable=False)  # Początek wydarzenia
     end_date = db.Column(db.Date, nullable=False)    # Koniec wydarzenia
     image = db.Column(db.String(200), nullable=True)  # Ścieżka do obrazu
+    display_title = db.Column(db.Boolean, default=True)  # Nowe pole
+    display_description = db.Column(db.Boolean, default=True)  # Nowe pole
 
 class Popup(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -121,8 +123,16 @@ class Popup(db.Model):
 @app.route('/')
 def home():
     today = datetime.now().date()
-    upcoming_event = Event.query.filter(Event.start_date <= today, Event.end_date >= today).order_by(Event.start_date.asc()).first()
-    next_event = Event.query.filter(Event.start_date > today).order_by(Event.start_date.asc()).first()
+
+
+    # Pobieramy wydarzenia w kolejności rozpoczęcia
+    events = Event.query.filter(Event.end_date >= today).order_by(Event.start_date.asc()).all()
+
+    # Jeśli mamy co najmniej jedno wydarzenie, ustawiamy je jako "upcoming_event"
+    upcoming_event = events[0] if events else None
+
+    # Jeśli mamy więcej niż jedno wydarzenie, ustawiamy drugie jako "next_event"
+    next_event = events[1] if len(events) > 1 else None
 
     return render_template('home.html', upcoming_event=upcoming_event, next_event=next_event, today=today)
 
@@ -632,6 +642,10 @@ def add_events():
         end_date = datetime.strptime(request.form['end_date'], '%Y-%m-%d').date()
         image = request.files.get('image')
         image_filename = None
+        display_title = 'display_title' in request.form  # Sprawdzamy czy checkbox został zaznaczony
+        display_description = 'display_description' in request.form  # Sprawdzamy czy checkbox został zaznaczony
+
+
 
         if image:
             filename = secure_filename(image.filename)
@@ -643,7 +657,9 @@ def add_events():
             description=description,
             start_date=start_date,
             end_date=end_date,
-            image=image_filename
+            image=image_filename,
+            display_title=display_title,
+            display_description=display_description
         )
         db.session.add(new_event)
         db.session.commit()

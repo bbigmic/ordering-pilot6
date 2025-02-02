@@ -32,12 +32,26 @@
 /* Styl dla obrazka */
 .text-page .header .image-holder {
     width: 100%;
-    height: 300px;
-    background-size: cover;
+    height: auto; /* Dopasowanie wysokości do proporcji obrazka */
+    max-height: 600px; /* Opcjonalnie: ograniczenie maksymalnej wysokości */
+    background-size: contain; /* Zapewnia, że cały obraz będzie widoczny */
     background-position: center;
+    background-repeat: no-repeat;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
+.text-page .header .image-holder img {
+    width: 100%; /* Dopasowanie szerokości */
+    height: auto; /* Automatyczna wysokość dla zachowania proporcji */
+    max-height: 600px;
+    object-fit: cover; /* Zapewnia dobre kadrowanie */
+    border-radius: 10px;
+}
+
 
 /* Sekcja hero */
 .text-page .hero {

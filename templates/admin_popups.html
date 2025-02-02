@@ -4,6 +4,21 @@
 
 {% block content %}
 <h1>Dodaj Pop-up</h1>
+
+<p class="admin-info">
+    Tutaj możesz dodać pop-up promocyjny, który będzie pojawiał się na stronie głównej restauracji.
+    Może to być informacja o promocji, wydarzeniu lub innym ważnym komunikacie dla klientów. <br>
+    Pop-up jest widoczny przez 10 sekund po wejściu na stronę. <br>
+    Użytkownik może w każdej chwili zamknąć pop-up, w jego prawym górnym rogu. <br>
+    <strong>Instrukcja:</strong>
+    <ul>
+        <li>Wybierz plik graficzny w formacie JPG, PNG lub GIF.</li>
+        <li>Po dodaniu pop-up będzie automatycznie widoczny dla klientów.</li>
+        <li>Możesz dezaktywować pop-up bez jego usuwania, jeśli jest tymczasowo niepotrzebny.</li>
+        <li>Aby usunąć istniejący pop-up i dodać nowy, wgraj nowy plik – stary zostanie zastąpiony.</li>
+    </ul>
+</p>
+
 <form action="/admin/add_popup" method="POST" enctype="multipart/form-data" class="form">
     <label for="popup_image">Wgraj zdjęcie:</label>
     <input type="file" id="popup_image" name="popup_image" accept="image/*" required>

@@ -1,6 +1,23 @@
 const cart = [];
 let total = 0;
 
+function adjustSliderHeight() {
+    const sliders = document.querySelectorAll('.item-slider');
+
+    sliders.forEach(slider => {
+        const bgImage = new Image();
+        bgImage.src = getComputedStyle(slider).backgroundImage.replace(/url\(['"]?(.*?)['"]?\)/i, '$1');
+
+        bgImage.onload = function () {
+            slider.style.height = bgImage.height + 'px'; // Ustawienie wysokości na podstawie załadowanego obrazka
+        };
+    });
+}
+
+// Wywołanie funkcji po załadowaniu strony i po zmianie rozmiaru okna
+window.addEventListener('load', adjustSliderHeight);
+window.addEventListener('resize', adjustSliderHeight);
+
 
 function addToCart(id, name, basePrice, containsAlcohol) {
     if (containsAlcohol) {
@@ -104,3 +121,5 @@ function toggleCart() {
         toggleBtn.innerHTML = `Pokaż Koszyk<br><span>${total.toFixed(2)} PLN 🛒</span>`;
     }
 }
+
+

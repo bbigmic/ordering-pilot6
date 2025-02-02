@@ -5,20 +5,54 @@
     background-color: #ecf2db;
 }
 
-/* Pojedyncze wydarzenie */
+/* Dodanie ciemnego tła dla tekstu */
 .events-section .event {
+    position: relative;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    min-height: 300px; /* Minimalna wysokość dla estetyki */
-    background-color: #fff;
-    border: 1px solid #ddd;
+    min-height: 300px; 
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
     margin-bottom: 30px;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
+    overflow: hidden;
 }
+
+/* Półprzezroczyste tło dla tekstu */
+.events-section .event::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6); /* Przyciemnienie tła */
+    border-radius: 10px;
+    z-index: 0;
+}
+
+/* Stylizacja nagłówków */
+.events-section .event h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #fff;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    position: relative;
+    z-index: 1;
+}
+
+/* Stylizacja opisu */
+.events-section .event p {
+    font-size: 1.2rem;
+    color: #f1f1f1;
+    position: relative;
+    z-index: 1;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
 
 
 
@@ -29,24 +63,7 @@
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }*/
 
-/* Nagłówki wydarzeń */
-.events-section .event h2 {
-    font-size: 1.8rem;
-    font-weight: bold;
-    color: #fff;
-    margin-bottom: 15px;
-    text-transform: uppercase;
-    position: relative;
-    z-index: 1;
-}
 
-.events-section .event p {
-    font-size: 1rem;
-    color: #fff;
-    margin-bottom: 10px;
-    position: relative;
-    z-index: 1;
-}
 
 .events-section .event strong {
     color: #e74c3c;

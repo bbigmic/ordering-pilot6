@@ -5,6 +5,13 @@
 {% block content %}
 <h1>Panel Administratora - Zarządzanie Menu</h1>
 
+<p class="admin-info">
+    W tej sekcji możesz zarządzać menu restauracji. Możesz dodać nowe danie, edytować jego szczegóły oraz usuwać dania.<br>
+    Dodane dania, wyświetlane są w odpowiednich kategoriach na stronie głównej.<br>
+    Pamiętaj, że kategorie "Lunch dnia" i "Deser dnia" wymagają ustawienia daty wyświetlania.
+</p>
+
+
 <h2>Dodaj Nowe Danie</h2>
 <form action="/add_menu_item" method="POST" enctype="multipart/form-data" class="form">
     <label for="name">Nazwa:</label>

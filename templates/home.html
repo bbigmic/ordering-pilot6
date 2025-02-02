@@ -39,10 +39,14 @@
         {% if upcoming_event and upcoming_event.start_date <= today <= upcoming_event.end_date %}
             <div class="item-slider" style="background-image: url('{{ url_for('uploaded_file', filename=upcoming_event.image) }}');">
                 <div class="event-info">
+                {% if upcoming_event.display_title %}
                     <h1>{{ upcoming_event.title }}</h1>
+                {% endif %}
+                {% if upcoming_event.display_description %}
                     <p>{{ upcoming_event.description }}</p>
-                    <p>Start: {{ upcoming_event.start_date.strftime('%d.%m.%Y') }}</p>
-                    <p>Koniec: {{ upcoming_event.end_date.strftime('%d.%m.%Y') }}</p>
+                {% endif %}
+                    <!-- <p>Start: {{ upcoming_event.start_date.strftime('%d.%m.%Y') }}</p>
+                    <p>Koniec: {{ upcoming_event.end_date.strftime('%d.%m.%Y') }}</p> -->
                 </div>
             </div>
         {% else %}
@@ -54,14 +58,18 @@
             </div>
         {% endif %}
 
-        <!-- Slide for the Next Event in Sequence -->
         {% if next_event %}
             <div class="item-slider" style="background-image: url('{{ url_for('uploaded_file', filename=next_event.image) }}');">
                 <div class="event-info">
-                    <h1>{{ next_event.title }}</h1>
-                    <p>{{ next_event.description }}</p>
-<!--                     <p>Start: {{ next_event.start_date.strftime('%d.%m.%Y') }} godz. 8:00</p>
-                    <p>End: {{ next_event.end_date.strftime('%d.%m.%Y') }} godz. 22:00</p> -->
+
+                    {% if next_event.display_title %}
+                        <h1>{{ next_event.title }}</h1>
+                    {% endif %}
+                    {% if next_event.display_description %}
+                        <p>{{ next_event.description }}</p>
+                    {% endif %}
+                    <!--<p>Start: {{ next_event.start_date.strftime('%d.%m.%Y') }}</p>
+                    <p>Koniec: {{ next_event.end_date.strftime('%d.%m.%Y') }}</p> -->
                 </div>
             </div>
         {% else %}
@@ -73,6 +81,8 @@
                 </div>
             </div>
         {% endif %}
+
+
 
             <!-- Static Slide for "Order and Collect" -->
             <div class="item-slider" style="background-image: url('/static/images/order_collect.jpg');">

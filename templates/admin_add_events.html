@@ -3,22 +3,40 @@
 {% block title %}Dodaj Wydarzenie{% endblock %}
 
 {% block content %}
+
+
 <h1>Dodaj Wydarzenie</h1>
+
+<p class="admin-info">
+    W tej sekcji możesz dodawać wydarzenia organizowane przez restaurację.<br>Możesz ustawić tytuł, opis, datę rozpoczęcia i zakończenia wyświetlania oraz dodać zdjęcie promujące wydarzenie.<br> Wydarzenia będą widoczne na stronie głównej restauracji oraz w zakładce "wydarzenia" strony głownej.<br>Pamiętaj, aby zaznaczyć "Wyświetlaj na slajdzie", aby tytuł lub opis był wyświetlany na stronie głównej. W przypadku nie zaznaczenia tych pól, wyświetlana będzie smaa grafika.
+</p>
+
 <form action="/admin/add_events" method="POST" enctype="multipart/form-data" class="form">
     <label for="title">Tytuł:</label>
-    <input type="text" id="title" name="title" required>
+    <input type="text" id="title" name="title">
 
     <label for="description">Opis:</label>
-    <textarea id="description" name="description" required></textarea>
+    <textarea id="description" name="description"></textarea>
 
-    <label for="start_date">Data rozpoczęcia:</label>
+    <label for="start_date">Data rozpoczęcia wyświetlania na stronie głównej:</label>
     <input type="date" id="start_date" name="start_date" required>
-
-    <label for="end_date">Data zakończenia:</label>
+    <br>
+    <label for="end_date">Data zakończenia wyświetlania na stronie głównej:</label>
     <input type="date" id="end_date" name="end_date" required>
-
+    <br>
     <label for="image">Zdjęcie (opcjonalne):</label>
     <input type="file" id="image" name="image" accept="image/*">
+
+    <br><!-- Nowe checkboxy do sterowania wyświetlaniem wydarzenia -->
+    <label>
+        <input type="checkbox" id="display_title" name="display_title">
+        Wyświetlaj tytuł na slajdzie
+    </label>
+    
+    <label>
+        <input type="checkbox" id="display_description" name="display_description">
+        Wyświetlaj opis na slajdzie
+    </label>
 
     <button type="submit">Dodaj Wydarzenie</button>
 </form>
@@ -31,6 +49,8 @@
             <p>{{ event.description }}</p>
             <p>Rozpoczęcie: {{ event.start_date.strftime('%Y-%m-%d') }}</p>
             <p>Zakończenie: {{ event.end_date.strftime('%Y-%m-%d') }}</p>
+            <p>Wyświetlaj tytuł: {{ "Tak" if event.display_title else "Nie" }}</p>
+            <p>Wyświetlaj opis: {{ "Tak" if event.display_description else "Nie" }}</p>
             {% if event.image %}
                 <img src="{{ url_for('uploaded_file', filename=event.image) }}" alt="{{ event.title }}" class="event-image">
             {% endif %}
