@@ -27,6 +27,7 @@
 
 <h2>Aktualny Pop-up</h2>
 {% if popup_image %}
+    <p> Aktywuj/dezaktywuj pop-up: </p>
     <form action="/admin/toggle_popup" method="POST" class="toggle-form">
         <label class="switch">
             <input style="display:none" type="checkbox" class="checkbox" name="is_active"

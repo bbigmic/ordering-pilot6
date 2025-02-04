@@ -13,10 +13,10 @@
 
 <form action="/admin/add_events" method="POST" enctype="multipart/form-data" class="form">
     <label for="title">Tytuł:</label>
-    <input type="text" id="title" name="title">
+    <input type="text" id="title" name="title" required>
 
     <label for="description">Opis:</label>
-    <textarea id="description" name="description"></textarea>
+    <textarea id="description" name="description" required></textarea>
 
     <label for="start_date">Data rozpoczęcia wyświetlania na stronie głównej:</label>
     <input type="date" id="start_date" name="start_date" required>
