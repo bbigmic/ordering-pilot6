@@ -681,6 +681,34 @@ def delete_event(event_id):
     flash("Wydarzenie zostało usunięte.")
     return redirect(url_for('add_events'))
 
+@app.route('/admin/edit_event/<int:event_id>', methods=['POST'])
+def edit_event(event_id):
+    event = Event.query.get_or_404(event_id)
+
+    event.title = request.form['title']
+    event.description = request.form['description']
+    
+    # Konwersja daty ze stringa na obiekt date
+    event.start_date = datetime.strptime(request.form['start_date'], '%Y-%m-%d').date()
+    event.end_date = datetime.strptime(request.form['end_date'], '%Y-%m-%d').date()
+
+        # Obsługa pól display_title i display_description
+    event.display_title = 'display_title' in request.form
+    event.display_description = 'display_description' in request.form
+
+    # Sprawdzenie czy użytkownik dodał nowe zdjęcie
+    if 'image' in request.files:
+        file = request.files['image']
+        if file.filename != '':
+            filename = secure_filename(file.filename)
+            file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            file.save(file_path)
+            event.image = filename  # Aktualizacja nazwy pliku w bazie
+
+    db.session.commit()
+    flash('Wydarzenie zostało zaktualizowane!', 'success')
+    return redirect(url_for('add_events'))
+
 @app.route('/o-nas')
 def o_nas():
     return render_template('cards/o-nas.html')

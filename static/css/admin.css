@@ -5,6 +5,30 @@ body {
     background-color: #f4f4f4;
 }
 
+.edit-form {
+    background: #fff;
+    padding: 1rem;
+    margin-top: 1rem;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    display: none;
+}
+
+.edit-btn {
+    background-color: #3498db;
+    color: white;
+    padding: 10px;
+    margin-top: 10px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.edit-btn:hover {
+    background-color: #2980b9;
+}
+
+
 .admin-info {
     background-color: #fff3cd;
     border-left: 5px solid #ffcc00;

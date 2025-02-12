@@ -11,6 +11,8 @@
     <!-- Owl Carousel CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+    
+    <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
@@ -19,6 +21,19 @@
     <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
 </head>
 <body>
+    <!-- Ekran ładowania -->
+    <!-- Ekran ładowania -->
+    <div id="loading-screen">
+        <dotlottie-player 
+            src="https://lottie.host/f4b75356-5140-45e7-b457-088248399373/yYdDhNv5iu.lottie" 
+            background="transparent" 
+            speed="1" 
+            style="width: 300px; height: 300px" 
+            loop 
+            autoplay>
+        </dotlottie-player>
+    </div>
+
 
     <!-- Navbar -->
     {% include 'navbar.html' %}
@@ -270,6 +285,19 @@
                 }
             });
         });
+    </script>
+    <script>
+document.addEventListener("DOMContentLoaded", function() {
+    setTimeout(function() {
+        const loadingScreen = document.getElementById("loading-screen");
+        loadingScreen.classList.add("hidden");
+
+        // Opcjonalnie: ukryj całkowicie po zaniku
+        setTimeout(() => loadingScreen.style.display = "none", 1000);
+    }, 2000); // Czekaj 2 sekundy przed rozpoczęciem animacji zanikania
+});
+
+
     </script>
 </body>
 </html>

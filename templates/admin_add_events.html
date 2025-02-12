@@ -32,7 +32,7 @@
         <input type="checkbox" id="display_title" name="display_title">
         Wyświetlaj tytuł na slajdzie
     </label>
-    
+    <br>
     <label>
         <input type="checkbox" id="display_description" name="display_description">
         Wyświetlaj opis na slajdzie
@@ -54,11 +54,50 @@
             {% if event.image %}
                 <img src="{{ url_for('uploaded_file', filename=event.image) }}" alt="{{ event.title }}" class="event-image">
             {% endif %}
+
+            <!-- Przycisk edycji -->
+            <button class="edit-btn" onclick="openEditForm({{ event.id }}, '{{ event.title }}', '{{ event.description }}', '{{ event.start_date }}', '{{ event.end_date }}')">Edytuj</button>
+
+            <!-- Formularz edycji ukryty domyślnie -->
+            <form id="edit-form-{{ event.id }}" action="/admin/edit_event/{{ event.id }}" method="POST" enctype="multipart/form-data" class="edit-form" style="display: none;">
+                <label for="edit-title-{{ event.id }}">Tytuł:</label>
+                <input type="text" id="edit-title-{{ event.id }}" name="title" value="{{ event.title }}">
+
+                <label for="edit-description-{{ event.id }}">Opis:</label>
+                <textarea id="edit-description-{{ event.id }}" name="description">{{ event.description }}</textarea>
+
+                <label for="edit-start-date-{{ event.id }}">Data rozpoczęcia:</label>
+                <input type="date" id="edit-start-date-{{ event.id }}" name="start_date" value="{{ event.start_date }}">
+
+                <label for="edit-end-date-{{ event.id }}">Data zakończenia:</label>
+                <input type="date" id="edit-end-date-{{ event.id }}" name="end_date" value="{{ event.end_date }}">
+
+                <label>
+                    <input type="checkbox" name="display_title" {% if event.display_title %}checked{% endif %}>
+                    Wyświetlaj tytuł
+                </label>
+
+                <label>
+                    <input type="checkbox" name="display_description" {% if event.display_description %}checked{% endif %}>
+                    Wyświetlaj opis
+                </label>
+
+                <label for="edit-image-{{ event.id }}">Nowe zdjęcie (opcjonalne):</label>
+                <input type="file" id="edit-image-{{ event.id }}" name="image" accept="image/*">
+
+                <button type="submit">Zapisz zmiany</button>
+            </form>
             <form action="/delete_event/{{ event.id }}" method="POST">
                 <button type="submit" class="delete-btn">Usuń</button>
             </form>
         </div>
     {% endfor %}
 </div>
+
+<script>
+    function openEditForm(id, title, description, startDate, endDate) {
+        document.getElementById(`edit-form-${id}`).style.display = 'block';
+    }
+</script>
 
 {% endblock %}
