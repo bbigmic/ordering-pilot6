@@ -1,13 +1,6 @@
 const cart = [];
 let total = 0;
 
-document.addEventListener("DOMContentLoaded", function() {
-    setTimeout(function() {
-        document.getElementById("loading-screen").style.display = "none";
-    }, 1500); // 1.5 sekundy
-});
-
-
 function adjustSliderHeight() {
     const sliders = document.querySelectorAll('.item-slider');
 

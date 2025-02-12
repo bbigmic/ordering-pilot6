@@ -68,20 +68,20 @@
 
                 <label for="edit-start-date-{{ event.id }}">Data rozpoczęcia:</label>
                 <input type="date" id="edit-start-date-{{ event.id }}" name="start_date" value="{{ event.start_date }}">
-
+                <br>
                 <label for="edit-end-date-{{ event.id }}">Data zakończenia:</label>
                 <input type="date" id="edit-end-date-{{ event.id }}" name="end_date" value="{{ event.end_date }}">
-
+                <br>
                 <label>
                     <input type="checkbox" name="display_title" {% if event.display_title %}checked{% endif %}>
                     Wyświetlaj tytuł
                 </label>
-
+                <br>
                 <label>
                     <input type="checkbox" name="display_description" {% if event.display_description %}checked{% endif %}>
                     Wyświetlaj opis
                 </label>
-
+                <br>
                 <label for="edit-image-{{ event.id }}">Nowe zdjęcie (opcjonalne):</label>
                 <input type="file" id="edit-image-{{ event.id }}" name="image" accept="image/*">
 
