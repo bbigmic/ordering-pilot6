@@ -141,9 +141,14 @@
                             <label>Uwagi do zamówienia:</label>
                             <input type="text" id="customization-{{ item.id }}" placeholder='(opcjonalnie) np. "bez sosu"'>
                         {% endif %}
-                        <label>
-                            <input type="checkbox" id="takeaway-{{ item.id }}"> Na wynos (+2.35 PLN)
-                        </label>
+                        {% if table_id %}
+                            <label>
+                                <input type="checkbox" id="takeaway-{{ item.id }}"> Na wynos (+2.35 PLN)
+                            </label>
+                        {% else %}
+                            
+                        {% endif %}
+                        
                         <button id="add-to-cart-{{ item.id }}" onclick="addToCart({{ item.id }}, '{{ item.name }}', {{ item.price }}, {{ 'true' if item.contains_alcohol else 'false' }})">Dodaj</button>
                     </div>
                 {% endfor %}
