@@ -18,6 +18,46 @@ function adjustSliderHeight() {
 window.addEventListener('load', adjustSliderHeight);
 window.addEventListener('resize', adjustSliderHeight);
 
+async function checkout() {
+    const tableInput = document.getElementById("table-id");
+    const tableId = tableInput ? tableInput.value : null;
+
+    let deliveryDetails = {};
+    
+    if (!tableId) {
+        const name = document.getElementById("name").value;
+        const phone = document.getElementById("phone").value;
+        const address = document.getElementById("address").value;
+        const postalCode = document.getElementById("postal_code").value;
+        const comments = document.getElementById("comments").value;
+
+        if (!name || !phone || !address || !postalCode) {
+            alert("Proszę wypełnić wszystkie wymagane pola do dostawy.");
+            return;
+        }
+
+        deliveryDetails = { name, phone, address, postalCode, comments };
+    }
+
+    const response = await fetch('/create-checkout-session', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ table_id: tableId, items: cart, delivery: deliveryDetails }),
+    });
+
+    const session = await response.json();
+    console.log("Odpowiedź serwera Stripe:", session);
+
+    if (session.id) {
+        const stripe = Stripe('pk_test_51Kgs2VKlKMZl0wtE6KIAqk5LRp0jtp5XykZrhmGjVb9LOlINbMdUtqFC3u8Q6vDK5Bh0EOUhpE0zWTnGhVlLtqHS00QRWUm5xr');
+        stripe.redirectToCheckout({ sessionId: session.id });
+    } else {
+        alert("Błąd płatności: " + session.error);
+    }
+}
+
+
+
 
 function addToCart(id, name, basePrice, containsAlcohol) {
     if (containsAlcohol) {
@@ -122,4 +162,10 @@ function toggleCart() {
     }
 }
 
+// Funkcja do rozwijania i zwijania kategorii
+function toggleCategory(button) {
+    button.classList.toggle("active");
+    const panel = button.nextElementSibling;
+    panel.style.display = panel.style.display === "none" ? "block" : "none";
+}
 

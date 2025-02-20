@@ -4,7 +4,34 @@
 
 {% block content %}
 
-<h2 style="width:70%;">Składasz <br>zamówienie <br>do stolika nr {{ table_id }}</h2>
+{% if table_id %}
+    <h2 style="width:70%;">Składasz zamówienie do stolika nr {{ table_id }}</h2>
+{% else %}
+    <h2 style="width:70%;">Zamawiasz online</h2>
+{% endif %}
+
+{% if table_id is none %}
+<div id="delivery-form">
+    <h2>Dane do dostawy</h2>
+    <form id="delivery-details">
+        <label for="name">Imię i nazwisko:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="phone">Numer telefonu:</label>
+        <input type="tel" id="phone" name="phone" pattern="[0-9]{9}" placeholder="Np. 123456789" required>
+
+        <label for="address">Adres dostawy:</label>
+        <input type="text" id="address" name="address" required>
+
+        <label for="postal_code">Kod pocztowy:</label>
+        <input type="text" id="postal_code" name="postal_code" pattern="[0-9]{2}-[0-9]{3}" placeholder="Np. 00-123" required>
+
+        <label for="comments">Uwagi do dostawy (opcjonalnie):</label>
+        <textarea id="comments" name="comments" rows="2"></textarea>
+    </form>
+</div>
+{% endif %}
+
 
 <!-- Przycisk do rozwijania koszyka -->
 <button onclick="toggleCart()" id="cart-toggle-btn">
@@ -133,19 +160,17 @@
     <ul id="cart-items"></ul>
     <div class="cart-footer">
         <p>Suma: <span id="cart-total">0</span> PLN</p>
-        <button onclick="submitOrder()">Zamów</button>
+        
+        {% if table_id %}
+            <button onclick="submitOrder()">Zamów</button>
+        {% else %}
+            <button onclick="checkout()">Zamów online i zapłać</button>
+        {% endif %}
     </div>
 </div>
 
 <script src="/static/script.js"></script>
+<script src="https://js.stripe.com/v3/"></script>
 
-<script>
-    // Funkcja do rozwijania i zwijania kategorii
-    function toggleCategory(button) {
-        button.classList.toggle("active");
-        const panel = button.nextElementSibling;
-        panel.style.display = panel.style.display === "none" ? "block" : "none";
-    }
-</script>
 
 {% endblock %}

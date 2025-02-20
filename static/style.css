@@ -86,6 +86,7 @@ h2 {
 }
 
 input[type="text"],
+input[type="tel"],
 input[type="number"],
 textarea,
 button {
@@ -123,6 +124,7 @@ button {
 #cart-items {
     list-style-type: none;
     padding: 0;
+        margin-top:40px;
 }
 
 #cart-items li {

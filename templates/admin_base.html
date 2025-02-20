@@ -14,24 +14,26 @@
         <nav class="sidebar">
             <button class="toggle-sidebar" onclick="toggleSidebar()">&#9776;</button>
             <div class="uls">
-                <h2>Panel Administratora</h2><hr>
-
-                <div class="only-worker-ul">
-                    <ul>
-                        <li class="sidebar-item"><a href="http://papu.kitchen/">Strona Główna Restauracji</a></li>
-<!--                         <li class="sidebar-item"><a href="{{ url_for('waiter_view') }}">Widok Kelnera</a></li>
-                        <li class="sidebar-item"><a href="{{ url_for('kitchen_view') }}">Widok Kuchni</a></li>
-                        <li class="sidebar-item"><a href="http://ordering-deploy.onrender.com/menu/2">Zamawianie</a></li> -->
-                        <!-- <li class="sidebar-item"><a href="">Rezerwacje stolików</a></li>                 -->
-                    </ul>
-                </div>
-                <hr>
+                <h2>Panel Administratora</h2>
                 <div class="admin-ul">
                     <ul>
+                        <li class="sidebar-item"><a href="{{ url_for('waiter_view') }}">Widok Kelnera</a></li>
+                        <li class="sidebar-item"><a href="{{ url_for('kitchen_view') }}">Widok Kuchni</a></li>
                         <li class="sidebar-item"><a href="{{ url_for('admin_panel') }}">Zarządzaj Aktualnym Menu</a></li>
-                        <!-- <li class="sidebar-item"><a href="{{ url_for('add_tables') }}">Stoliki</a></li> -->
+                        <li class="sidebar-item"><a href="{{ url_for('add_tables') }}">Zarządzaj Stolikami</a></li>
                         <li class="sidebar-item"><a href="{{ url_for('add_events') }}">Zarządzaj Wydarzeniami</a></li>
                         <li class="sidebar-item"><a href="{{ url_for('admin_add_popup') }}">Zarządzaj Pop-upem</a></li>
+                    </ul>
+                </div><hr>
+                
+                <div class="only-worker-ul">
+                    <h2>Widoki klienta</h2>
+                    <ul>
+                        <li class="sidebar-item"><a href="{{ url_for('home') }}">Strona Główna Restauracji</a></li>
+                        <li class="sidebar-item"><a href="{{ url_for('menu_online_order') }}"> Zamawianie ze Stolika</a></li>
+                        <li class="sidebar-item"><a href="{{ url_for('menu_online_order') }}">📲 Zamawianie Online</a></li> <!-- NOWY LINK -->
+
+                        <!-- <li class="sidebar-item"><a href="">Rezerwacje stolików</a></li> -->
                     </ul>
                 </div>
             </div>

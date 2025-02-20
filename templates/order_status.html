@@ -8,6 +8,7 @@
 <div class="status-container">
     <h2> Przyjęliśmy Twoje zamówienie </h2>
 
+    {% if order.table_id %}
     <div class="action-buttons">
         <button onclick="callWaiter({{ order.id }})" class="btn">Zawołaj kelnera</button>
     </div>
@@ -15,6 +16,7 @@
     <div class="bill-request">
         <button onclick="showPaymentOptions()" class="btn">Poproś rachunek</button>
     </div>
+    {% endif %}
 
  <!-- Sekcja wyboru płatności i innych opcji -->
     <div id="payment-section" style="display: none;">
@@ -52,15 +54,24 @@
     <h1 style="margin-top:20px;"> Status zamówienia</h1>
     <h4> W trakcie przygotowania. </h4>
     <h4>Numer zamówienia: <h1>{{ order.order_number }}</h1> </h4>
+
+    {% if order.table_id %}
     <h4>Do stolika numer {{ order.table_id }}</h4>
-    {% if remaining_seconds is not none %}
-        <p id="timer" class="timer">
-            Przybliżony czas realizacji: <span id="time-remaining">{{ remaining_seconds }}</span>
-        </p>
-        <div id="spinner" class="spinner"></div>
-    {% else %}
-        <p>Status zamówienia: <b>{{ order.status }}</b></p>
     {% endif %}
+
+    <p id="status-message" class="timer">
+        {% if order.status == 'Pending' %}
+            Oczekiwanie na akceptację
+        {% elif remaining_seconds is not none and remaining_seconds > 0 %}
+            Przybliżony czas realizacji: <span id="time-remaining">{{ (remaining_seconds // 60) | round }}</span> min
+        {% elif order_completed %}
+            Zamówienie prawie gotowe!
+        {% endif %}
+    </p>
+
+    <div id="spinner" class="spinner" style="display: {% if order.status == 'Accepted' and remaining_seconds > 0 %}block{% else %}none{% endif %};"></div>
+
+
 
     <h3>Szczegóły zamówienia:</h3>
     <ul>
@@ -176,6 +187,38 @@
         })
         .catch(error => console.error("Błąd przy żądaniu rachunku:", error));
     }
+
+
+function updateOrderStatus(orderId) {
+    fetch(`/check_order_status/${orderId}`)
+        .then(response => response.json())
+        .then(data => {
+            console.log("Aktualizacja statusu zamówienia:", data);
+
+            const statusMessage = document.getElementById("status-message");
+            const timeRemaining = document.getElementById("time-remaining");
+            const spinner = document.getElementById("spinner");
+
+            if (data.status === "Pending") {
+                statusMessage.innerHTML = "Oczekiwanie na akceptację";
+                spinner.style.display = "block";
+            } else if (data.remaining_seconds !== null && data.remaining_seconds > 0) {
+                statusMessage.innerHTML = `Przybliżony czas realizacji: <span id="time-remaining">${Math.ceil(data.remaining_seconds / 60)} min</span>`;
+                spinner.style.display = "block";
+            } else {
+                statusMessage.innerHTML = "Zamówienie prawie gotowe!";
+                spinner.style.display = "none";
+            }
+        })
+        .catch(error => console.error("Błąd aktualizacji statusu:", error));
+}
+
+// Uruchamiamy aktualizację co 5 sekund
+const orderId = "{{ order.id }}";
+setInterval(() => updateOrderStatus(orderId), 5000);
+
+
+
 
 </script>
 {% endblock %}

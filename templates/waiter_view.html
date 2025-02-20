@@ -10,10 +10,30 @@
 <div id="orders" class="orders">
     {% for order in orders %}
         <div class="order" id="order-{{ order.id }}">
-            <h2>Zamówienie nr {{ order.order_number }} - Stolik nr {{ order.table_id }}</h2>
+            <h2>Zamówienie nr {{ order.order_number }} - 
+                {% if order.table_id %}
+                    Stolik nr {{ order.table_id }}
+                {% else %}
+                    <span style="color: red;">Zamówienie online</span>
+                {% endif %}
+            </h2>
             <p>Status: {{ order.status }} <a> id: {{ order.id }}</a></p>
             <p>Łączna cena: {{ order.total_price }} PLN</p>
             <p>Godzina zamówienia: {{ order.created_at.strftime("%H:%M") }}</p>
+
+            {% if order.table_id is none %}
+            <h3 style="color: green;">Dane do dostawy:</h3>
+            <ul>
+                <li><strong>Imię i nazwisko:</strong> {{ order.delivery_name }}</li>
+                <li><strong>Telefon:</strong> {{ order.delivery_phone }}</li>
+                <li><strong>Adres:</strong> {{ order.delivery_address }}</li>
+                <li><strong>Kod pocztowy:</strong> {{ order.delivery_postal }}</li>
+                {% if order.delivery_comments %}
+                    <li><strong>Uwagi:</strong> {{ order.delivery_comments }}</li>
+                {% endif %}
+            </ul>
+            {% endif %}
+
             <h3>Szczegóły zamówienia:</h3>
             <ul>
                 {% for item in order.order_items %}
@@ -98,6 +118,7 @@
             .catch(error => console.error("Błąd przy pobieraniu powiadomień:", error));
     }
 
+
 function updateOrders() {
     fetch('/check_new_orders')
         .then(response => {
@@ -132,11 +153,34 @@ function updateOrders() {
                         `;
                     }
 
+                    // Sprawdzenie, czy zamówienie jest online (brak `table_id`)
+                    let tableInfo = order.table_id 
+                        ? `Stolik nr ${order.table_id}` 
+                        : `<span style="color: red;">Zamówienie online (DOSTAWA)</span>`;
+
+                    // Dodanie sekcji z danymi dostawy, jeśli zamówienie jest online
+                    let deliveryInfo = "";
+                    if (!order.table_id) {
+                        deliveryInfo = `
+                            <h3 style="color: green;">Dane do dostawy:</h3>
+                            <ul>
+                                <li><strong>Imię i nazwisko:</strong> ${order.delivery_name}</li>
+                                <li><strong>Telefon:</strong> ${order.delivery_phone}</li>
+                                <li><strong>Adres:</strong> ${order.delivery_address}</li>
+                                <li><strong>Kod pocztowy:</strong> ${order.delivery_postal}</li>
+                                ${order.delivery_comments ? `<li><strong>Uwagi:</strong> ${order.delivery_comments}</li>` : ""}
+                            </ul>
+                        `;
+                    }
+
                     orderDiv.innerHTML = `
-                        <h2>Zamówienie nr ${order.order_number} - Stolik nr ${order.table_id}</h2>
+                        <h2>Zamówienie nr ${order.order_number} - ${tableInfo}</h2>
                         <p>Status: ${order.status} <a> id: ${order.order_id}</a></p>
                         <p>Łączna cena: ${order.total_price} PLN</p>
                         <p>Godzina zamówienia: ${order.order_time}</p>
+
+                        ${deliveryInfo} <!-- Tutaj dodajemy dane dostawy dla zamówień online -->
+
                         <h3>Szczegóły zamówienia:</h3>
                         <ul>
                             ${order.items.map(item => `
@@ -147,6 +191,7 @@ function updateOrders() {
                                 </li>
                             `).join("")}
                         </ul>
+
                         <div id="order-action-${order.order_id}">
                             ${buttonHTML}
                         </div>
@@ -157,6 +202,8 @@ function updateOrders() {
         })
         .catch(error => console.error("Błąd przy pobieraniu zamówień:", error));
 }
+
+
 
 function acceptOrder(orderId) {
     const realizationTimeInput = document.getElementById(`realization-time-${orderId}`);
