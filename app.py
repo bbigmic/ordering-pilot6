@@ -15,8 +15,8 @@ import stripe
 
 load_dotenv()
 app = Flask(__name__)
-# app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = os.getenv("SECRET_KEY", "defaultsecretkey")
 stripe.api_key = "sk_test_51Kgs2VKlKMZl0wtESiq4jAssEFFcjzInx13XKAPDYiwTdzUju1nDL1PI51Y7fNK6nD6YzHcf0xdWcDb5Ac1UOK1300U6FWKuTp"
@@ -1039,5 +1039,5 @@ def uploaded_file(filename):
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
-    # app.run(host='0.0.0.0', port=5000)
-    app.run(debug=True, port=5001)
+    app.run(host='0.0.0.0', port=5000)
+    # app.run(debug=True, port=5001)
