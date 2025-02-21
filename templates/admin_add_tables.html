@@ -8,10 +8,11 @@
 <p class="admin-info">
     W tej sekcji możesz dodawać stoliki do systemu. <br>Po dodaniu stolika zostanie wygenerowany kod QR, 
     który możesz umieścić na stoliku, aby umożliwić gościom składanie zamówień do tego stolika za pomocą skanowania kodu.
+    Kody generowane są jednorazowo i każdy z nich jest przypisany do konkretnego stolika.
 </p>
 
 <form method="POST">
-    <label for="table_count">Liczba stolików do dodania:</label>
+    <label for="table_count">Wprowadź liczbę stolików do dodania:</label>
     <input type="number" id="table_count" name="table_count" min="1" required>
     <button type="submit">Dodaj Stoliki</button>
 </form>

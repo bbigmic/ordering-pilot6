@@ -1026,10 +1026,6 @@ def napoje():
         alkohole_items=alkohole_items
     )
 
-@app.route('/kategoria/zamow')
-def zamow_online():
-    return render_template('kategoria/zamow.html')
-
 
 @app.route('/images/<filename>')
 def uploaded_file(filename):
